@@ -15,3 +15,21 @@ http://dualspark.com
 - Why am I talking about Ansible and configuration?
 - What's this 12 Factor App thing?
 - Why should I care?
+
+* Why am I talking about Ansible and configuration?
+
+- Ansible is an easy to understand configuration management system for servers that stick around
+- Ansible's place in the cloud isn't as clear as its use in the datacenter
+- It's still good at applying changes, let's take advantage of that!
+
+* What's this 12 Factor App thing?
+
+- http://12factor.net
+- "The contributors to this document have been directly involved in the development and deployment of hundreds of apps, and indirectly witnessed the development, operation, and scaling of hundreds of thousands of apps via our work on the Heroku platform."
+- My take: it's a set of patterns to use for architecting services that live in the cloud
+
+* Why should I care?
+
+- Care about Ansible: we can keep using a familiar system
+- Care aout 12 Factor App: it's a guide to solid cloud services
+- Care about caring: _Recursion_ _detected_
