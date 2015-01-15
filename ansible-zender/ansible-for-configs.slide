@@ -33,3 +33,62 @@ http://dualspark.com
 - Care about Ansible: we can keep using a familiar system
 - Care aout 12 Factor App: it's a guide to solid cloud services
 - Care about caring: _Recursion_ _detected_
+
+* Warning
+
+This talk is going to be Amazon Web Services (AWS) centric.  There's analogies in Azure, Openstack, etc...
+
+* Build, release, run
+
+12 Factor App Newspeak
+
+- Build: convert source code into an executable bundle.  In the Java + Linux world, perhaps a JAR with Jetty included with an init script to handle the service.
+- Release: add configuration for the web service.  Populate the init script with the desired settings.
+- Run: run service so it can start serving traffic.
+
+* Goal
+
+- Reproducible image.  An Amazon Machine Image (AMI) for our example.
+
+* Tools
+
+- Packer.io
+- Ansible
+
+* Build with Packer
+
+(Cool sample of Packer and provisioning here)
+
+* Release with Ansible
+
+(Not what it sounds like - 12 Factor Newspeak!)
+(Use Packer to call Ansible which supplies configs)
+
+* Careful with that pull request, Eugene
+
+Keep things together:
+- Packer build/release configs for service
+- Ansible playbook for service
+
+Keeping them in one repo reduces moving parts.  Everything needed to build, release and run should be in one spot.
+
+* What did we cover?
+
+- Briefly: what's Ansible?
+- Also briefly: 12 Factor Application build, release, deploy and Ansible's place in that.
+- Why the above is important to Ansible, why 12 Factor App is important to you.
+
+* What didn't we cover?
+
+- Ansible can do more than provide configs: combine with Packer to get away from writing provisioning tasks in shell scripts.
+- Ansible can manage AWS infrastructure as well.  Talk to me if you do this.
+
+* Questions, comments, general heckling.
+
+I hope everyone's specific heckling already occurred.
+
+* BONUS SLIDE
+
+DualSpark is hiring.  Tackle large scope, interesting problems by helping customers migrate to AWS.
+
+Interested? Let's talk, here or via email.
