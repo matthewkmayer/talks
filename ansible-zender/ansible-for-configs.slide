@@ -15,12 +15,20 @@ http://dualspark.com
 - Why am I talking about Ansible and configuration?
 - What's this 12 Factor App thing?
 - Why should I care?
+- Making it happen
 
 * Why am I talking about Ansible and configuration?
 
-- Ansible is an easy to understand configuration management system for servers that stick around
-- Ansible's place in the cloud isn't as clear as its use in the datacenter
+- Ansible is a robust, easy to understand open source configuration management system for machines
+- But Ansible's place in the cloud isn't as clear as its use in the datacenter
 - It's still good at applying changes, let's take advantage of that!
+
+* What? (revisited)
+
+- Why am I talking about Ansible and configuration? *✓*
+- What's this 12 Factor App thing?
+- Why should I care?
+- Making it happen
 
 * What's this 12 Factor App thing?
 
@@ -28,11 +36,27 @@ http://dualspark.com
 - "The contributors to this document have been directly involved in the development and deployment of hundreds of apps, and indirectly witnessed the development, operation, and scaling of hundreds of thousands of apps via our work on the Heroku platform."
 - My take: it's a set of patterns to use for architecting services that live in the cloud
 
+* What? (revisited)
+
+- Why am I talking about Ansible and configuration? *✓*
+- What's this 12 Factor App thing? *✓*
+- Why should I care?
+- Making it happen
+
 * Why should I care?
 
 - Care about Ansible: we can keep using a familiar system
 - Care aout 12 Factor App: it's a guide to solid cloud services
 - Care about caring: _Recursion_ _detected_
+
+* What? (revisited)
+
+- Why am I talking about Ansible and configuration? *✓*
+- What's this 12 Factor App thing? *✓*
+- Why should I care? *✓*
+- Making it happen
+
+* Making it happen
 
 * Warning
 
@@ -49,6 +73,8 @@ This talk is going to be Amazon Web Services (AWS) centric.  There's analogies i
 * Goal
 
 - Reproducible image.  An Amazon Machine Image (AMI) for our example.
+
+Why is this our goal?  Let's call it a web service that sits in front of a database and traffic scales up and down quickly.  To keep good response times, we need to spin up instances that serve traffic in seconds, not minutes.
 
 * Tools
 
@@ -71,6 +97,8 @@ Keep things together:
 - Ansible playbook for service
 
 Keeping them in one repo reduces moving parts.  Everything needed to build, release and run should be in one spot.
+
+This is different than the usual idea of keeping all configuration management in one central location (repo).
 
 * What did we cover?
 
