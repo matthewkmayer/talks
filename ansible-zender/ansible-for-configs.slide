@@ -13,12 +13,14 @@ http://dualspark.com
 
 https://github.com/matthewkmayer/talks
 
+- *ansible-zender* directory
+
 Other resources, such as end-to-end examples of what's discussed, will be available via a medium.com blog entry and another GitHub repo in the near future.
 
 * Who am I?
 
 - Jack of all trades
-- Wrote, implemented and maintained microservices in the cloud
+- Written, implemented and maintained microservices in the cloud
 - Super keen on agile software development
 - Obligatory "DevOps fan" bullet point
 - Light Ansible user for months.  Months!
@@ -33,7 +35,7 @@ Other resources, such as end-to-end examples of what's discussed, will be availa
 * Why am I talking about Ansible and configuration?
 
 - Ansible is a robust, easy to understand open source configuration management system for machines
-- But Ansible's place in the cloud isn't as clear as its use in the datacenter
+- For fast, reliable scaling out in the cloud, using Ansible shouldn't be done on a per-instance basis
 - It's still good at applying changes, let's take advantage of that!
 
 * What? (revisited)
@@ -93,7 +95,7 @@ Why is this our goal?  Let's call it a web service that sits in front of a datab
 
 * Ansible's place
 
-Remember when I said Ansible's place in the cloud isn't as clear as its datacenter role?  To achieve our fast-starting service, we can't have the instance come up, run `yum update` then install the required service and dependencies.  This method is slow to get a new instance serving traffic and is rough on bandwidth since those install mirrors would get a large load of traffic from each new instance.
+Remember when I said Ansible shouldn't be used on each instance as it's brought online?  To achieve our fast-starting service, we can't have the instance come up, run `yum update` then install the required service and dependencies.  This method is slow to get a new instance serving traffic and is rough on bandwidth since those install mirrors would get a large load of traffic from each new instance.
 
 Ask me how I know running `yum update` is a bad idea on instance startup with an old base AMI.
 
@@ -187,9 +189,9 @@ Keeping them in one repo reduces moving parts.  Everything needed to build, rele
 	    ├── settings.sh
 	    └── simple-hello.go
 
-* Build pipeline output
+* Build pipeline's output
 
-We've installed our application, applied configuration via ansible and ensured it will start with the instance.  That image is ready to quickly serve traffic when it's brought up!
+We've installed our application, applied configuration via ansible and ensured it will start on instance launch.  That image is ready to quickly serve traffic when it's brought up!
 
 * What did we cover?
 
@@ -199,8 +201,8 @@ We've installed our application, applied configuration via ansible and ensured i
 
 * What didn't we cover?
 
-- Ansible can do more than provide configs: combine with Packer to get away from writing provisioning tasks in shell scripts.
-- Ansible can manage AWS infrastructure as well.  Talk to me if you do this.
+- Ansible can do more than provide configs: combine with Packer on the build step to get away from writing provisioning tasks in shell scripts.
+- Ansible can manage AWS infrastructure as well.  But talk to me if you do this.
 
 * Questions, comments, general heckling.
 
