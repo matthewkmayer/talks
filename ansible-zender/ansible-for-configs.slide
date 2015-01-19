@@ -1,6 +1,6 @@
 Ansible for configuration source
 12-Factor App style
-14 Jan 2015
+20 Jan 2015
 Tags: Ansible, 12-Factor
 
 Matthew Mayer
@@ -87,9 +87,15 @@ This talk is going to be Amazon Web Services (AWS) centric.  There's analogies i
 
 * Goal
 
-- Reproducible image.  An Amazon Machine Image (AMI) for our example.
+- Reproducible, immutable image.  An Amazon Machine Image (AMI) for our example.
 
 Why is this our goal?  Let's call it a web service that sits in front of a database and traffic scales up and down quickly.  To keep good response times, we need to spin up instances that serve traffic in seconds, not minutes.
+
+* Ansible's place
+
+Remember when I said Ansible's place in the cloud isn't as clear as its datacenter role?  To achieve our fast-starting service, we can't have the instance come up, run `yum update` then install the required service and dependencies.  This method is slow to get a new instance serving traffic and is rough on bandwidth since those install mirrors would get a large load of traffic from each new instance.
+
+Ask me how I know running `yum update` is a bad idea on instance startup with an old base AMI.
 
 * Tools
 
@@ -130,7 +136,7 @@ The build step's goal is to install the application without configuration.
 
 * Release with Ansible
 
-Not what it sounds like - 12 Factor Newspeak!  We'll apply the settings from ansible here. 
+Not what it sounds like - this is 12 Factor Newspeak!  We'll apply the settings from ansible here. 
 
 Packer release step snippit:
 
@@ -181,10 +187,14 @@ Keeping them in one repo reduces moving parts.  Everything needed to build, rele
 	    ├── settings.sh
 	    └── simple-hello.go
 
+* Build pipeline output
+
+We've installed our application, applied configuration via ansible and ensured it will start with the instance.  That image is ready to quickly serve traffic when it's brought up!
+
 * What did we cover?
 
 - Briefly: what's Ansible?
-- Also briefly: 12 Factor Application build, release, deploy and Ansible's place in that.
+- Also briefly: 12 Factor Application build, release, deploy and *Ansible's* *place* *in* *it.*
 - Why the above is important to Ansible, why 12 Factor App is important to you.
 
 * What didn't we cover?
