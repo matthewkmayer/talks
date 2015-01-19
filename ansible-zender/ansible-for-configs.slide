@@ -1,0 +1,221 @@
+Ansible for configuration source
+12-Factor App style
+20 Jan 2015
+Tags: Ansible, 12-Factor
+
+Matthew Mayer
+Consultant Developer, DualSpark
+matthew@dualspark.com
+http://dualspark.com
+@motoblag
+
+* Slides available on GitHub
+
+https://github.com/matthewkmayer/talks
+
+- *ansible-zender* directory
+
+Other resources, such as end-to-end examples of what's discussed, will be available via a medium.com blog entry and another GitHub repo in the near future.
+
+* Who am I?
+
+- Jack of all trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+- Obligatory "DevOps fan" bullet point
+- Light Ansible user for months.  Months!
+
+* What?
+
+- Why am I talking about Ansible and configuration?
+- What's this 12 Factor App thing?
+- Why should I care?
+- How to make it happen
+
+* Why am I talking about Ansible and configuration?
+
+- Ansible is a robust, easy to understand open source configuration management system for machines
+- Traditionally used by running on one to many hosts to ensure it has a service and its dependencies installed
+- For fast, reliable scaling out in the cloud, using Ansible shouldn't be done on a per-instance basis
+- It's still good at applying changes, let's take advantage of that!
+
+* What? (revisited)
+
+- Why am I talking about Ansible and configuration? *✓*
+- What's this 12 Factor App thing?
+- Why should I care?
+- How to make it happen
+
+* What's this 12 Factor App thing?
+
+- http://12factor.net
+- "The contributors to this document have been directly involved in the development and deployment of hundreds of apps, and indirectly witnessed the development, operation, and scaling of hundreds of thousands of apps via our work on the Heroku platform."
+- My take: it's a set of patterns to use for architecting services that live in the cloud
+
+* What? (revisited)
+
+- Why am I talking about Ansible and configuration? *✓*
+- What's this 12 Factor App thing? *✓*
+- Why should I care?
+- How to make it happen
+
+* Why should I care?
+
+- Care about Ansible: we can keep using a familiar system
+- Care about 12 Factor App: it's a guide to solid cloud services
+- Care about caring: _Recursion_ _detected_
+
+* What? (revisited)
+
+- Why am I talking about Ansible and configuration? *✓*
+- What's this 12 Factor App thing? *✓*
+- Why should I care? *✓*
+- How to make it happen
+
+* How to make it happen
+
+* Warning
+
+This talk is going to be Amazon Web Services (AWS) centric.  There's analogies in Azure, Openstack, etc...
+
+* Goal
+
+- Reproducible, immutable image.  An Amazon Machine Image (AMI) for our example.
+
+Why is this our goal?  Let's call it a web service that sits in front of a database and traffic scales up and down quickly.  To keep good response times, we need to spin up instances that serve traffic in seconds, not minutes.
+
+* Ansible's place
+
+Remember when I said Ansible shouldn't be used on each instance as it's brought online?  To achieve our fast-starting service, we can't have the instance come up, run `yum update` then install the required service and dependencies.  This method is slow to get a new instance serving traffic and is rough on bandwidth since those install mirrors would get a large load of traffic from each new instance.
+
+Ask me how I know running `yum update` is a bad idea on instance startup with an old base AMI.
+
+* Build, release, run
+
+12 Factor App Newspeak
+
+.image build-release-run.png
+
+- Build: convert source code into an executable bundle.  In the Java + Linux world, perhaps a JAR with Jetty included with an init script to handle the service.
+- Release: add configuration for the web service.  Populate the init script with the desired settings.
+- Run: run service so it can start serving traffic.
+
+* Let's do it
+
+* Tools
+
+- Packer.io
+- Ansible
+- init script
+
+* Build pipeline
+
+.image build-pipeline.png
+
+* Build pipeline
+
+.image build-pipeline-with-ansible.png
+
+* Build with Packer
+
+Snippit from Packer build step:
+
+  "provisioners" :[
+    { "type": "file",
+      "source": "./webservice/main",
+      "destination": "/home/ec2-user/main" },
+    { "type": "file",
+      "source": "./webservice/goapp",
+      "destination": "/home/ec2-user/goapp" },
+    { "type": "file",
+      "source": "./webservice//settings.sh",
+      "destination": "/home/ec2-user/settings.sh" },
+    ...
+    { "type": "shell",
+      "inline": ["sudo cp /home/ec2-user/goapp /etc/init.d/goapp"] },
+    { "type": "shell",
+      "inline": ["sudo yum install -y --enablerepo=epel ansible"]  }
+  ]
+
+The build step's goal is to install the application without configuration.
+
+* Release with Ansible
+
+Not what it sounds like - this is 12 Factor Newspeak!  We'll apply the settings from ansible here. 
+
+Packer release step snippit:
+
+  "provisioners" :[
+    { "type": "ansible-local",
+      "playbook_file": "./ansible/playbook.yml" },
+    { "type": "shell",
+      "inline": ["sudo chkconfig --add goapp"]  },
+    { "type": "shell",
+      "inline": ["sudo chkconfig goapp on"]  }
+  ]
+
+* Release with Ansible
+
+	cat ansible/playbook.yml 
+	---
+	- hosts: all
+	  vars:
+	    http_port: 8080
+	  remote_user: root
+	  tasks:
+	  - name: set environment variables
+	    lineinfile:
+	      dest=/home/ec2-user/settings.sh
+	      regexp="GOAPP_HTTPPORT=\"\""
+	      line="export GOAPP_HTTPPORT=\"8080\"" # should use that variable from above
+
+Now we have our application installed along with configuration values.  
+
+* But what does it mean?
+
+Instead of putting Ansible towards the end of an instance's startup lifecycle, we put it closer to the beginning by running it once and saving changes to a machine image.  This allows us to run Ansible much less, have it done automatically by our build pipeline (think CI/build server) and ensure the configurations are all in one spot.
+
+* Build pipeline's output
+
+We've installed our application, applied configuration via ansible and ensured it will start on instance launch.  That image is ready to quickly serve traffic when it's brought up!
+
+* Careful with that pull request, Eugene
+
+Keep things together:
+- Packer build/release configs for service
+- Ansible playbook for service
+
+Keeping them in one repo reduces moving parts.  Everything needed to build, release and run should be in one spot.
+
+	.
+	├── ansible
+	│   └── playbook.yml
+	├── packer
+	│   ├── packer-build.json
+	│   └── packer-release.json
+	├── README.md
+	└── webservice
+	    ├── goapp
+	    ├── main
+	    ├── settings.sh
+	    └── simple-hello.go
+
+
+* What did we cover?
+
+- Briefly: what's Ansible?
+- Also briefly: 12 Factor Application build, release, run and *Ansible's* *place* *in* *it.*
+- Why the above is important to Ansible, why 12 Factor App is important to you.
+
+* What didn't we cover?
+
+- Ansible can do more than provide configs: combine with Packer on the build step to get away from writing provisioning tasks in shell scripts.
+- Ansible can manage AWS infrastructure as well.  But talk to me if you do this.
+
+* Questions, comments, general heckling.
+
+* BONUS SLIDE
+
+DualSpark is hiring.  Tackle large scope, interesting problems by helping customers migrate to AWS.
+
+Interested? Let's talk, here or via email.

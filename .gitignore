@@ -3,6 +3,9 @@
 *.a
 *.so
 
+# gedit temp for slides
+*.slide~
+
 # Folders
 _obj
 _test
