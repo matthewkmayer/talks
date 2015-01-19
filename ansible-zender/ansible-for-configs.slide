@@ -9,13 +9,26 @@ matthew@dualspark.com
 http://dualspark.com
 @motoblag
 
+* Slides available on GitHub
+
+https://github.com/matthewkmayer/talks
+
+Other resources, such as end-to-end examples of what's discussed, will be available via a medium.com blog entry and another GitHub repo in the near future.
+
+* Who am I?
+
+- Jack of all trades
+- Wrote, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+- Obligatory "DevOps fan" bullet point
+- Light Ansible user for months.  Months!
 
 * What?
 
 - Why am I talking about Ansible and configuration?
 - What's this 12 Factor App thing?
 - Why should I care?
-- Making it happen
+- How to make it happen
 
 * Why am I talking about Ansible and configuration?
 
@@ -28,7 +41,7 @@ http://dualspark.com
 - Why am I talking about Ansible and configuration? *✓*
 - What's this 12 Factor App thing?
 - Why should I care?
-- Making it happen
+- How to make it happen
 
 * What's this 12 Factor App thing?
 
@@ -41,12 +54,12 @@ http://dualspark.com
 - Why am I talking about Ansible and configuration? *✓*
 - What's this 12 Factor App thing? *✓*
 - Why should I care?
-- Making it happen
+- How to make it happen
 
 * Why should I care?
 
 - Care about Ansible: we can keep using a familiar system
-- Care aout 12 Factor App: it's a guide to solid cloud services
+- Care about 12 Factor App: it's a guide to solid cloud services
 - Care about caring: _Recursion_ _detected_
 
 * What? (revisited)
@@ -54,9 +67,9 @@ http://dualspark.com
 - Why am I talking about Ansible and configuration? *✓*
 - What's this 12 Factor App thing? *✓*
 - Why should I care? *✓*
-- Making it happen
+- How to make it happen
 
-* Making it happen
+* How to make it happen
 
 * Warning
 
@@ -65,6 +78,8 @@ This talk is going to be Amazon Web Services (AWS) centric.  There's analogies i
 * Build, release, run
 
 12 Factor App Newspeak
+
+.image build-release-run.png
 
 - Build: convert source code into an executable bundle.  In the Java + Linux world, perhaps a JAR with Jetty included with an init script to handle the service.
 - Release: add configuration for the web service.  Populate the init script with the desired settings.
