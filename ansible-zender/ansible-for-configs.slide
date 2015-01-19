@@ -35,6 +35,7 @@ Other resources, such as end-to-end examples of what's discussed, will be availa
 * Why am I talking about Ansible and configuration?
 
 - Ansible is a robust, easy to understand open source configuration management system for machines
+- Traditionally used by running on one to many hosts to ensure it has a service and its dependencies installed
 - For fast, reliable scaling out in the cloud, using Ansible shouldn't be done on a per-instance basis
 - It's still good at applying changes, let's take advantage of that!
 
@@ -77,16 +78,6 @@ Other resources, such as end-to-end examples of what's discussed, will be availa
 
 This talk is going to be Amazon Web Services (AWS) centric.  There's analogies in Azure, Openstack, etc...
 
-* Build, release, run
-
-12 Factor App Newspeak
-
-.image build-release-run.png
-
-- Build: convert source code into an executable bundle.  In the Java + Linux world, perhaps a JAR with Jetty included with an init script to handle the service.
-- Release: add configuration for the web service.  Populate the init script with the desired settings.
-- Run: run service so it can start serving traffic.
-
 * Goal
 
 - Reproducible, immutable image.  An Amazon Machine Image (AMI) for our example.
@@ -98,6 +89,18 @@ Why is this our goal?  Let's call it a web service that sits in front of a datab
 Remember when I said Ansible shouldn't be used on each instance as it's brought online?  To achieve our fast-starting service, we can't have the instance come up, run `yum update` then install the required service and dependencies.  This method is slow to get a new instance serving traffic and is rough on bandwidth since those install mirrors would get a large load of traffic from each new instance.
 
 Ask me how I know running `yum update` is a bad idea on instance startup with an old base AMI.
+
+* Build, release, run
+
+12 Factor App Newspeak
+
+.image build-release-run.png
+
+- Build: convert source code into an executable bundle.  In the Java + Linux world, perhaps a JAR with Jetty included with an init script to handle the service.
+- Release: add configuration for the web service.  Populate the init script with the desired settings.
+- Run: run service so it can start serving traffic.
+
+* Let's do it
 
 * Tools
 
@@ -168,6 +171,14 @@ Packer release step snippit:
 
 Now we have our application installed along with configuration values.  
 
+* But what does it mean?
+
+Instead of putting Ansible towards the end of an instance's startup lifecycle, we put it closer to the beginning by running it once and saving changes to a machine image.  This allows us to run Ansible much less, have it done automatically by our build pipeline (think CI/build server) and ensure the configurations are all in one spot.
+
+* Build pipeline's output
+
+We've installed our application, applied configuration via ansible and ensured it will start on instance launch.  That image is ready to quickly serve traffic when it's brought up!
+
 * Careful with that pull request, Eugene
 
 Keep things together:
@@ -189,14 +200,11 @@ Keeping them in one repo reduces moving parts.  Everything needed to build, rele
 	    ├── settings.sh
 	    └── simple-hello.go
 
-* Build pipeline's output
-
-We've installed our application, applied configuration via ansible and ensured it will start on instance launch.  That image is ready to quickly serve traffic when it's brought up!
 
 * What did we cover?
 
 - Briefly: what's Ansible?
-- Also briefly: 12 Factor Application build, release, deploy and *Ansible's* *place* *in* *it.*
+- Also briefly: 12 Factor Application build, release, run and *Ansible's* *place* *in* *it.*
 - Why the above is important to Ansible, why 12 Factor App is important to you.
 
 * What didn't we cover?
@@ -205,8 +213,6 @@ We've installed our application, applied configuration via ansible and ensured i
 - Ansible can manage AWS infrastructure as well.  But talk to me if you do this.
 
 * Questions, comments, general heckling.
-
-I hope everyone's specific heckling already occurred.
 
 * BONUS SLIDE
 
