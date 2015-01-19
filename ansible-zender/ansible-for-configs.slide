@@ -95,15 +95,70 @@ Why is this our goal?  Let's call it a web service that sits in front of a datab
 
 - Packer.io
 - Ansible
+- init script
+
+* Build pipeline
+
+.image build-pipeline.png
+
+* Build pipeline
+
+.image build-pipeline-with-ansible.png
 
 * Build with Packer
 
-(Cool sample of Packer and provisioning here)
+Snippit from Packer build step:
+
+  "provisioners" :[
+    { "type": "file",
+      "source": "./webservice/main",
+      "destination": "/home/ec2-user/main" },
+    { "type": "file",
+      "source": "./webservice/goapp",
+      "destination": "/home/ec2-user/goapp" },
+    { "type": "file",
+      "source": "./webservice//settings.sh",
+      "destination": "/home/ec2-user/settings.sh" },
+    ...
+    { "type": "shell",
+      "inline": ["sudo cp /home/ec2-user/goapp /etc/init.d/goapp"] },
+    { "type": "shell",
+      "inline": ["sudo yum install -y --enablerepo=epel ansible"]  }
+  ]
+
+The build step's goal is to install the application without configuration.
 
 * Release with Ansible
 
-(Not what it sounds like - 12 Factor Newspeak!)
-(Use Packer to call Ansible which supplies configs)
+Not what it sounds like - 12 Factor Newspeak!  We'll apply the settings from ansible here. 
+
+Packer release step snippit:
+
+  "provisioners" :[
+    { "type": "ansible-local",
+      "playbook_file": "./ansible/playbook.yml" },
+    { "type": "shell",
+      "inline": ["sudo chkconfig --add goapp"]  },
+    { "type": "shell",
+      "inline": ["sudo chkconfig goapp on"]  }
+  ]
+
+* Release with Ansible
+
+	cat ansible/playbook.yml 
+	---
+	- hosts: all
+	  vars:
+	    http_port: 8080
+	  remote_user: root
+	  tasks:
+	  - name: set environment variables
+	    lineinfile:
+	      dest=/home/ec2-user/settings.sh
+	      regexp="GOAPP_HTTPPORT=\"\""
+	      line="export GOAPP_HTTPPORT=\"8080\"" # should use that variable from above
+
+Now we have our application installed along with configuration values.  
 
 * Careful with that pull request, Eugene
 
@@ -113,7 +168,18 @@ Keep things together:
 
 Keeping them in one repo reduces moving parts.  Everything needed to build, release and run should be in one spot.
 
-This is different than the usual idea of keeping all configuration management in one central location (repo).
+	.
+	├── ansible
+	│   └── playbook.yml
+	├── packer
+	│   ├── packer-build.json
+	│   └── packer-release.json
+	├── README.md
+	└── webservice
+	    ├── goapp
+	    ├── main
+	    ├── settings.sh
+	    └── simple-hello.go
 
 * What did we cover?
 
