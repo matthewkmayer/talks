@@ -25,16 +25,75 @@ https://github.com/matthewkmayer/talks
 
 * What?
 
-- 
+- What's a bulkhead?
+- Why do I want one in my system?
+- Why do I want *lots* in my system?
+- Implementing them, from small to large scale
+- Show they work, or: Breakin' things.
+
+* What's a bulkhead?
+
+(bulkhead image)
+
+* What's a bulkhead in software?
+
+A construct to prevent cascading failures.  
+
+One function or method failing or being slow shouldn't take down your entire application or system.
+
+* Why do I want one in my system?
+
+Bend, don't break.
+
+Keep system responsive.
+
+* Why do I want *lots* in my system?
+
+By composing data from many sources, the system can still be used if some are not working at 100%.  Graceful degredation is the key.
+
+* Implementing them, from small to large scale
+
+* Function/method level
+
+https://gobyexample.com/timeouts
+
+* Function/method level expanded
+
+Hystrix or Oxy
+
+* Architectural level
+
+- *Microservices*
+- Load balancers with health checks
+- Split servers across datacenters - the cloud has your back
+
+* Show they work, or: Breakin' things.
+
+*TEST* *IT*
+
+* Show they work, or: Breakin' things.
+
+Manual monkeys: Failure Fridays.  Introduce failure manually: kick over a server, use firewall rules to introduce latency, etc...
+
+* Show they work, or: Breakin' things.
+
+Automated with the Simian Army
+
+* Warnings
+
+- Don't let perfect be the enemy of good.  One bulkhead now is better than many sometime in the future.
+- Don't gold plate: too many bulkheads cost code complexity and performance.  Ask if adding more serves the business needs.
 
 * What? (revisited)
 
--  *✓*
+- What's a bulkhead? *✓*
+- Why do I want one in my system? *✓*
+- Why do I want *lots* in my system? *✓*
+- Implementing them, from small to large scale *✓*
+- Show they work, or: Breakin' things. *✓*
 
 
-* Let's do it
-
-* Questions, comments, general heckling.
+* Questions, comments
 
 * BONUS SLIDE
 
