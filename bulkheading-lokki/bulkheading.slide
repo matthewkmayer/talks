@@ -59,7 +59,9 @@ https://gobyexample.com/timeouts
 
 * Function/method level expanded
 
-Hystrix or Oxy
+Let's use Netflix's hard work:
+
+.image hystrix.png
 
 * Architectural level
 
