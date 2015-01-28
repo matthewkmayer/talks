@@ -170,6 +170,7 @@ Provides more than just bulkheading:
 - Request collapsing
 - Caching
 - Easy chaining of circuit breakers: if the memcache call fails, fall back to the database and attempt to repopulate the item into memcache.  
+- Monitoring
 
 * Use Hystrix or analogous library for your language
 
@@ -177,15 +178,17 @@ Provides more than just bulkheading:
 
 * Architectural level
 
-The ship is your API call to the service that relies on other services.
+The ship is your composition of services.
 
 Provide *something* in response to a request, in an acceptable timeframe.
 
 * Architectural level
 
+Combine lower level bulkheading with:
+
 - *Microservices*
 - Load balancers with health checks
-- Split service instances across datacenters - the cloud has your back
+- Spread service instances across datacenters - the cloud has your back
 
 * Show they work, or: Breakin' things.
 
@@ -225,7 +228,7 @@ Automate with the Simian Army
 * Takeaways
 
 - Use circuit breakers, such as Hystrix
-- Architect to use microservices
+- Architect to take advantage of microservices
 - Use multiple datacenters/availability zones
 - *Test* *failures*
 
