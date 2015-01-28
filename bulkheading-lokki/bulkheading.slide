@@ -59,19 +59,11 @@ By composing data from many sources, the system can still be used if some are no
 
 * Function/method level
 
-https://gobyexample.com/timeouts
+The ship is your service: bulkheads keep it from sinking if one function is slow.
 
-	func main() {
-	    c1 := make(chan string, 1)
-	    go func() { 
-			time.Sleep(time.Second * 2)
-			c1 <- "result 1" }()
-	    select {
-	    case res := <-c1:
-			fmt.Println(res)
-	    case <-time.After(time.Second * 1):
-			fmt.Println("timeout 1") }
-	}
+* Function/method level
+
+Example code from https://gobyexample.com/timeouts .
 
 * Function/method level
 
@@ -87,13 +79,113 @@ Let's use Netflix's hard work:
 
 .image hystrix.png
 
+* Function/method level expanded
+
+From the Hystrix wiki: 
+
+- Give protection from and control over latency and failure from dependencies (typically accessed over network) accessed via 3rd party client libraries.
+- Stop cascading failures in a complex distributed system.
+- Fail fast and rapidly recover.
+- Fallback and gracefully degrade when possible.
+- Enable near real-time monitoring, alerting and operational control.
+
+* Yay Java code samples
+
+	public class CommandHelloWorld extends HystrixCommand<String> {
+
+	    private final String name;
+
+	    public CommandHelloWorld(String name) {
+			super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+			this.name = name;
+	    }
+
+	    @Override
+	    protected String run() {
+			// a real example would do work like a network call here
+			return "Hello " + name + "!";
+	    }
+	}
+
+* Yay Java code samples
+
+	@Test
+	public void testSynchronous() {
+	    assertEquals("Hello World!", new CommandHelloWorld("World").execute());
+	    assertEquals("Hello Bob!", new CommandHelloWorld("Bob").execute());
+	}
+
+* Yay Java code samples
+
+Falling back:
+
+	public class CommandHelloFailure extends HystrixCommand<String> {
+
+	    private final String name;
+
+	    public CommandHelloFailure(String name) {
+			super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+			this.name = name;
+	    }
+
+	    @Override
+	    protected String run() {
+			throw new RuntimeException("this command always fails");
+	    }
+
+	    @Override
+	    protected String getFallback() {
+			return "Hello Failure " + name + "!";
+	    }
+	}
+
+* Yay Java code samples
+
+Testing the fallback:
+
+	@Test
+	public void testSynchronous() {
+		assertEquals("Hello Failure World!", new CommandHelloFailure("World").execute());
+		assertEquals("Hello Failure Bob!", new CommandHelloFailure("Bob").execute());
+	}
+
+* Enough Java
+
+* But not done with Hystrix!
+
+Monitoring comes with bulkheading:
+
+.image hystrix-dashboard-single-row.png
+
+* But not done with Hystrix!
+
+.image dashboard-annoted-circuit-640.png
+
+* Hystrix recap
+
+Provides more than just bulkheading:
+
+- Fallbacks
+- Thread pools
+- Request collapsing
+- Caching
+- Easy chaining of circuit breakers: if the memcache call fails, fall back to the database and attempt to repopulate the item into memcache.  
+
+* Use Hystrix or analogous library for your language
+
 * Architectural level
+
+* Architectural level
+
+The ship is your API call to the service that relies on other services.
+
+Provide *something* in response to a request, in an acceptable timeframe.
 
 * Architectural level
 
 - *Microservices*
 - Load balancers with health checks
-- Split servers across datacenters - the cloud has your back
+- Split service instances across datacenters - the cloud has your back
 
 * Show they work, or: Breakin' things.
 
@@ -101,7 +193,15 @@ Let's use Netflix's hard work:
 
 * Show they work, or: Breakin' things.
 
+Last exhausting ship analogy:
+
+It's like poking a hole in the hull and verifying the ship doesn't sink.
+
+* Show they work, or: Breakin' things.
+
 Manual monkeys: Failure Fridays.  Introduce failure manually: kick over a server, use firewall rules to introduce latency, etc...
+
+See PagerDuty's "Failure Friday" blog post *and* their "Failure Friday" video on YouTube.
 
 * Show they work, or: Breakin' things.
 
@@ -122,6 +222,12 @@ Automate with the Simian Army
 - Implementing them, from small to large scale *✓*
 - Show they work, or: Breakin' things. *✓*
 
+* Takeaways
+
+- Use circuit breakers, such as Hystrix
+- Architect to use microservices
+- Use multiple datacenters/availability zones
+- *Test* *failures*
 
 * Questions, comments
 

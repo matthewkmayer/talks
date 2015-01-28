@@ -1,6 +1,8 @@
 package main
+
 import "time"
 import "fmt"
+
 func main() {
     c2 := make(chan string, 1)
     go func() { time.Sleep(time.Second * 2)
