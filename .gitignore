@@ -6,6 +6,9 @@
 # gedit temp for slides
 *.slide~
 
+# gedit for golang samples
+*.go~
+
 # Folders
 _obj
 _test
