@@ -6,6 +6,8 @@
 # gedit temp for slides
 *.slide~
 
+*.DS_Store
+
 # gedit for golang samples
 *.go~
 
