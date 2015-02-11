@@ -23,8 +23,88 @@ https://github.com/matthewkmayer/talks
 - Super keen on agile software development
 - Obligatory "DevOps fan" bullet point
 
-* What?
+* What's a Strangler application?
 
+* Fowler
+- http://www.martinfowler.com/bliki/StranglerApplication.html
+- Gradually create a new system over the existing one, taking over responsibility
+
+* Keys for strangling
+- Strong monitoring
+- List of goals for strangling: performance, splitting a monolith into microservices, switching languages
+- Smooth deployment pipeline
+- Strong testing coverage
+
+* Easy mode with RESTful API
+- If the application to be strangled has REST or REST-like endpoints, delegate calls to new service
+
+* Easy mode with RESTful API
+- If the application to be strangled has REST or REST-like endpoints, delegate calls to new service
+
+Code sample here!
+
+* Feature switches
+- On the strangled app, introduce code switches to enable traffic to the strangler
+- Pace yourself: slow but don't relent
+- If things fall apart, toggle switches back to the strangled app
+
+* Feature switches
+Code sample here!
+
+* Testing
+- Unit tests may be able to be transferred to the new app
+- Functional/integration testing the best way to go
+
+* Integration testing
+- Lots of tools available: cucumber, curl from shell scripts, QA environment
+- Now's your chance: if the strangled app doesn't have integration tests, write some!  Ensure they go into your build pipeline and are run automatically.
+
+* Integration testing
+Cucumber code sample here
+
+* Strangling in a conservative environment
+Use circuit breaker behavior
+
+- Add circuit breakers to strangled app
+- Normal flow: existing behavior wrapped by circuit breakers
+- Next: parallelize calls: one call to existing behavior, one to strangler app.  If they are different, report the difference and use the existing behavior.
+- Moving on: switch default circuit breaker call to use the strangler app.  Fallback is existing strangled app behavior.
+- Finally: clean up the fallback to provide actual fallback, removing old code from strangled app.
+
+* Strangling in a conservative environment
+It's a long process but allows careful migration to new service with minimal risk.
+
+* Let's get traction: strangling in action
+
+* Existing app
+Toy Ruby app - let's replace with Go!
+
+* Endpoints in Ruby
+- GET /v1/user
+- GET /v1/order
+
+* Ruby code
+Sinatra handlers here
+
+* Endpoints to cut over
+- GET /v1/user - add more Golang
+- GET /v1/order
+
+* Ruby code
+Sinatra handlers with delegation
+
+* Golang code
+Handle the user endpoints
+
+* Demo all Ruby with cucumber tests
+
+* Demo strangling Ruby with cucumber tests
+
+* Recap
+- Strangle slowly
+- Use tests
+- Circuit breakers
+- Feature toggles
 
 * Questions, comments
 
