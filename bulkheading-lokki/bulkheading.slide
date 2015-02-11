@@ -1,0 +1,241 @@
+Bulkheading
+Tiring a ship metaphor
+23 Jan 2015
+Tags: Bulkheading,
+
+Matthew Mayer
+Consultant Developer, DualSpark
+matthew@dualspark.com
+http://dualspark.com
+@motoblag
+
+* Slides available on GitHub
+
+https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL: Look for a bunch of Golang projects and a shameful .NET one.
+- *bulkheading-lokki* directory
+
+* Who am I?
+
+- Jack of all trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+- Obligatory "DevOps fan" bullet point
+
+* What?
+
+- What's a bulkhead?
+- Why do I want one in my system?
+- Why do I want *lots* in my system?
+- Implementing them, from small to large scale
+- Show they work, or: Breakin' things.
+
+* What's a bulkhead?
+
+* Ship bulkhead
+
+.image bulkheads.jpg
+
+* What's a bulkhead in software?
+
+* What's a bulkhead in software?
+
+A construct to prevent cascading failures.
+
+One function or method failing or being slow shouldn't take down your entire application or system.
+
+* Why do I want one in my system?
+
+Bend, don't break.
+
+Keep system responsive.
+
+* Why do I want *lots* in my system?
+
+By composing data from many sources, the system can still be used if some are not working at 100%.  Graceful degredation is the key.
+
+* Implementing them, from small to large scale
+
+* Function/method level
+
+The ship is your service: bulkheads keep it from sinking if one function is slow.
+
+* Function/method level
+
+Example code from https://gobyexample.com/timeouts .
+
+* Function/method level
+
+.play timeout1.go
+
+* Function/method level
+
+.play timeout2.go
+
+* Function/method level expanded
+
+Let's use Netflix's hard work:
+
+.image hystrix.png
+
+* Function/method level expanded
+
+From the Hystrix wiki: 
+
+- Give protection from and control over latency and failure from dependencies (typically accessed over network) accessed via 3rd party client libraries.
+- Stop cascading failures in a complex distributed system.
+- Fail fast and rapidly recover.
+- Fallback and gracefully degrade when possible.
+- Enable near real-time monitoring, alerting and operational control.
+
+* Yay Java code samples
+
+	public class CommandHelloWorld extends HystrixCommand<String> {
+
+	    private final String name;
+
+	    public CommandHelloWorld(String name) {
+			super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+			this.name = name;
+	    }
+
+	    @Override
+	    protected String run() {
+			// a real example would do work like a network call here
+			return "Hello " + name + "!";
+	    }
+	}
+
+* Yay Java code samples
+
+	@Test
+	public void testSynchronous() {
+	    assertEquals("Hello World!", new CommandHelloWorld("World").execute());
+	    assertEquals("Hello Bob!", new CommandHelloWorld("Bob").execute());
+	}
+
+* Yay Java code samples
+
+Falling back:
+
+	public class CommandHelloFailure extends HystrixCommand<String> {
+
+	    private final String name;
+
+	    public CommandHelloFailure(String name) {
+			super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+			this.name = name;
+	    }
+
+	    @Override
+	    protected String run() {
+			throw new RuntimeException("this command always fails");
+	    }
+
+	    @Override
+	    protected String getFallback() {
+			return "Hello Failure " + name + "!";
+	    }
+	}
+
+* Yay Java code samples
+
+Testing the fallback:
+
+	@Test
+	public void testSynchronous() {
+		assertEquals("Hello Failure World!", new CommandHelloFailure("World").execute());
+		assertEquals("Hello Failure Bob!", new CommandHelloFailure("Bob").execute());
+	}
+
+* Enough Java
+
+* But not done with Hystrix!
+
+Monitoring comes with bulkheading:
+
+.image hystrix-dashboard-single-row.png
+
+* But not done with Hystrix!
+
+.image dashboard-annoted-circuit-640.png
+
+* Hystrix recap
+
+Provides more than just bulkheading:
+
+- Fallbacks
+- Thread pools
+- Request collapsing
+- Caching
+- Easy chaining of circuit breakers: if the memcache call fails, fall back to the database and attempt to repopulate the item into memcache.  
+- Monitoring
+
+* Use Hystrix or analogous library for your language
+
+* Architectural level
+
+* Architectural level
+
+The ship is your composition of services.
+
+Provide *something* in response to a request, in an acceptable timeframe.
+
+* Architectural level
+
+Combine lower level bulkheading with:
+
+- *Microservices*
+- Load balancers with health checks
+- Spread service instances across datacenters - the cloud has your back
+
+* Show they work, or: Breakin' things.
+
+*TEST* *IT*
+
+* Show they work, or: Breakin' things.
+
+Last exhausting ship analogy:
+
+It's like poking a hole in the hull and verifying the ship doesn't sink.
+
+* Show they work, or: Breakin' things.
+
+Manual monkeys: Failure Fridays.  Introduce failure manually: kick over a server, use firewall rules to introduce latency, etc...
+
+See PagerDuty's "Failure Friday" blog post *and* their "Failure Friday" video on YouTube.
+
+* Show they work, or: Breakin' things.
+
+Automate with the Simian Army
+
+.image Netflix-Simian-Army.png
+
+* Warnings
+
+- Don't let perfect be the enemy of good.  One bulkhead now is better than many sometime in the future.
+- Don't gold plate: too many bulkheads cost code complexity and performance.  Ask if adding more serves the business needs.
+
+* What? (revisited)
+
+- What's a bulkhead? *✓*
+- Why do I want one in my system? *✓*
+- Why do I want *lots* in my system? *✓*
+- Implementing them, from small to large scale *✓*
+- Show they work, or: Breakin' things. *✓*
+
+* Takeaways
+
+- Use circuit breakers, such as Hystrix
+- Architect to take advantage of microservices
+- Use multiple datacenters/availability zones
+- *Test* *failures*
+
+* Questions, comments
+
+* BONUS SLIDE
+
+DualSpark is hiring.  Tackle large scope, interesting problems by helping customers migrate to AWS.
+
+Interested? Let's talk, here or via email.
