@@ -81,13 +81,15 @@ Let's use Netflix's hard work:
 
 * Function/method level expanded
 
-From the Hystrix wiki: 
+From the Hystrix wiki:
 
 - Give protection from and control over latency and failure from dependencies (typically accessed over network) accessed via 3rd party client libraries.
 - Stop cascading failures in a complex distributed system.
 - Fail fast and rapidly recover.
 - Fallback and gracefully degrade when possible.
 - Enable near real-time monitoring, alerting and operational control.
+
+This is bulkheading *and* circuit breaking.
 
 * Yay Java code samples
 
@@ -169,10 +171,15 @@ Provides more than just bulkheading:
 - Thread pools
 - Request collapsing
 - Caching
-- Easy chaining of circuit breakers: if the memcache call fails, fall back to the database and attempt to repopulate the item into memcache.  
+- Easy chaining of circuit breakers: if the memcache call fails, fall back to the database and attempt to repopulate the item into memcache.
 - Monitoring
 
 * Use Hystrix or analogous library for your language
+
+* Function/method level anti-patterns
+
+- Everything looks like a nail, but don't wrap up every single method in a bulkhead.
+- Not keeping track of what fails and how failures cascade: know where to put your next bulkhead.  Use *metrics*, log aggregation, etc...
 
 * Architectural level
 
@@ -189,6 +196,16 @@ Combine lower level bulkheading with:
 - *Microservices*
 - Load balancers with health checks
 - Spread service instances across datacenters - the cloud has your back
+
+* Architectural level anti-pattern
+
+Get the granularity right!
+
+* Architectural level anti-pattern
+
+Pods not good:
+
+.image pods.png
 
 * Show they work, or: Breakin' things.
 
@@ -211,6 +228,10 @@ See PagerDuty's "Failure Friday" blog post *and* their "Failure Friday" video on
 Automate with the Simian Army
 
 .image Netflix-Simian-Army.png
+
+* Testing anti-pattern
+
+Don't manually test the same things over and over again: once you've verified the system can handle an app server getting kicked over, use your next Failure Friday to test something else.
 
 * Warnings
 
