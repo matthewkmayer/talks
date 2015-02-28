@@ -79,7 +79,21 @@ https://github.com/matthewkmayer/talks
 - Now's your chance: if the strangled app doesn't have integration tests, write some!  Ensure they go into your build pipeline and are run automatically.
 
 * Integration testing
-Cucumber code sample here
+
+  When(/^I ask for the details of user (\d+)$/) do |user_id|
+    url = URI.parse('http://localhost:9494/v1/user/' + user_id.to_s)
+    req = Net::HTTP::Get.new(url.to_s)
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
+    $response = res.body
+  end
+
+  Then(/^I should get the details for user (\d+)$/) do |user_id|
+    body = JSON.parse($response)
+    expect(body['name']).to eq('foo')
+    expect(body['id']).to eq(user_id.to_i)
+  end
 
 * Strangling in a conservative environment
 Use circuit breaker behavior
@@ -100,17 +114,40 @@ Toy Ruby app - let's replace with Go!
 
 * Endpoints in Ruby
 - GET /v1/user
-- GET /v1/order
+- GET /v1/user/{id}
 
 * Ruby code
-Sinatra handlers here
+  get "/v1/user" do
+    content_type :json
+    $users.to_json
+  end
 
-* Endpoints to cut over
-- GET /v1/user - add more Golang
-- GET /v1/order
+  get "/v1/user/:id" do
+    content_type :json
+    user = get_user_by_id(params[:id].to_i)
+    if user != nil
+      return user.to_json
+    end
+    return 404
+  end
+
+* Endpoint to cut over
+- GET /v1/user/{id} - add more Golang
 
 * Ruby code
-Sinatra handlers with delegation
+
+  get "/v1/user/:id" do
+    if ($delegate_user_call)
+      # call golang endpoint and return it
+    end
+
+    content_type :json
+    user = get_user_by_id(params[:id].to_i)
+    if user != nil
+      return user.to_json
+    end
+    return 404
+  end
 
 * Golang code
 Handle the user endpoints
@@ -119,11 +156,34 @@ Handle the user endpoints
 
 * Demo strangling Ruby with cucumber tests
 
+* Two ways of strangling
+- Proxy
+- Delegation
+
+* Proxy
+Make a new service that has every endpoint the to-be-strangled service has.
+
+Proxy calls back to the original service.
+
+Switch clients early.
+
+Move functionality into this new service chunks at a time, removing dependency on strangled service.
+
+* Delegation
+This is what we just did.
+
+Modifications are done to the to-be-strangled service: delegate calls to the new service.
+
+Still transfer responsibility in chunks.
+
+When all functionality is in the new service, clients do a big switch to the new service.
+
 * Recap
 - Strangle slowly
 - Use tests
 - Circuit breakers
 - Feature toggles
+- Proxy or delegate
 
 * Questions, comments
 
