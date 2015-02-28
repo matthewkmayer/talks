@@ -18,13 +18,13 @@ get "/v1/user/:id" do
   end
 
   content_type :json
-  user = get_user_id(params[:id].to_i)
+  user = get_user_by_id(params[:id].to_i)
   if user != nil
     return user.to_json
   end
   return 404
 end
 
-def get_user_id (id)
+def get_user_by_id (id)
   $users.find{|user| user[:id] == id}
 end
