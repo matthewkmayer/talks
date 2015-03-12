@@ -26,12 +26,12 @@ https://github.com/matthewkmayer/talks
 * What's a Strangler application?
 
 * Fowler
-- http://www.martinfowler.com/bliki/StranglerApplication.html
-- Gradually create a new system over the existing one, taking over responsibility
+.link http://www.martinfowler.com/bliki/StranglerApplication.html http://www.martinfowler.com/bliki/StranglerApplication.html
+Gradually create a new system over the existing one, taking over responsibility
 
-* Keys for strangling
-- Strong monitoring
+* Keys for effective strangling
 - List of goals for strangling: performance, splitting a monolith into microservices, switching languages
+- Strong monitoring
 - Smooth deployment pipeline
 - Strong testing coverage
 
@@ -72,13 +72,15 @@ https://github.com/matthewkmayer/talks
 
 * Testing
 - Unit tests may be able to be transferred to the new app
-- Functional/integration testing the best way to go
+- Functional / *integration* testing the *best* way to go
 
 * Integration testing
-- Lots of tools available: cucumber, curl from shell scripts, QA environment
-- Now's your chance: if the strangled app doesn't have integration tests, write some!  Ensure they go into your build pipeline and are run automatically.
+- Lots of tools available: cucumber, curl from shell scripts, QA/smoketest environment
+- Now's your chance: if the strangled app doesn't have integration tests, write some!  Ensure they go into your build pipeline and are automatically run.
 
 * Integration testing
+
+Cucumber:
 
   When(/^I ask for the details of user (\d+)$/) do |user_id|
     url = URI.parse('http://localhost:9494/v1/user/' + user_id.to_s)
@@ -165,7 +167,7 @@ Make a new service that has every endpoint the to-be-strangled service has.
 
 Proxy calls back to the original service.
 
-Switch clients early.
+Switch clients early to new service.
 
 Move functionality into this new service chunks at a time, removing dependency on strangled service.
 
@@ -177,6 +179,12 @@ Modifications are done to the to-be-strangled service: delegate calls to the new
 Still transfer responsibility in chunks.
 
 When all functionality is in the new service, clients do a big switch to the new service.
+
+* Proxy or delegation?
+
+Figure out what fits best in your environment.
+
+If in doubt, go with the proxying pattern.  The big switch to a new service might be rough.
 
 * Recap
 - Strangle slowly
