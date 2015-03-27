@@ -1,0 +1,247 @@
+Strangler pattern
+Ruby to Golang
+23 Jan 2015
+Tags: Strangler, Golang, Go
+
+Matthew Mayer
+Consultant Developer, DualSpark
+matthew@dualspark.com
+http://dualspark.com
+@motoblag
+
+* Slides available on GitHub
+
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL: Look for a bunch of Golang projects and a shameful .NET one.
+- *strangler-infusereo* directory
+
+* Who am I?
+
+- Jack of all trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+- Obligatory "DevOps fan" bullet point
+
+* What's a Strangler application?
+
+* Fowler
+.link http://www.martinfowler.com/bliki/StranglerApplication.html http://www.martinfowler.com/bliki/StranglerApplication.html
+Gradually create a new system over the existing one, taking over responsibility
+
+* Why strangle an application?
+
+* Why strangle an application?
+
+- Improve performance
+- Split a monolith into microservices
+- Switch languages
+- Migration from on-premise to cloud
+
+* Keys for effective strangling
+- List of goals for strangling
+- Strong monitoring
+- Smooth deployment pipeline
+- Strong test coverage
+
+* Two ways of strangling
+- Proxy
+- Delegation
+
+* Proxy
+
+.image proxy.png
+
+* Delegation
+
+.image delegate.png
+
+* Easy mode with RESTful API
+- If the application to be strangled has REST or REST-like endpoints, delegate calls to new service
+
+* Easy mode with RESTful API
+- If the application to be strangled has REST or REST-like endpoints, delegate calls to new service
+
+  get "/v1/user/:id" do
+    content_type :json
+    user = get_user_by_id(params[:id].to_i)
+    if user != nil
+      return user.to_json
+    end
+    return 404
+  end
+
+* Feature switches
+- On the strangled app, introduce code switches to enable traffic to the strangler
+- Pace yourself: slow but don't relent
+- If things fall apart, toggle switches back to the strangled app
+
+* Feature switches
+
+  get "/v1/user/:id" do
+    if ($delegate_user_call)
+      # call golang endpoint and return it
+    end
+
+    content_type :json
+    user = get_user_by_id(params[:id].to_i)
+    if user != nil
+      return user.to_json
+    end
+    return 404
+  end
+
+* Testing
+- Unit tests may be able to be transferred to the new app
+- Functional / *integration* testing the *best* way to go
+
+* Integration testing
+- Lots of tools available: cucumber, curl from shell scripts, QA/smoketest environment
+- Now's your chance: if the strangled app doesn't have integration tests, write some!  Ensure they go into your build pipeline and are automatically run.
+
+* Integration testing
+
+Cucumber:
+
+  When(/^I ask for the details of user (\d+)$/) do |user_id|
+    url = URI.parse('http://localhost:9494/v1/user/' + user_id.to_s)
+    req = Net::HTTP::Get.new(url.to_s)
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
+    $response = res.body
+  end
+
+  Then(/^I should get the details for user (\d+)$/) do |user_id|
+    body = JSON.parse($response)
+    expect(body['name']).to eq('foo')
+    expect(body['id']).to eq(user_id.to_i)
+  end
+
+* We'll see more cucumber in action soon
+
+* Strangling in a conservative environment
+Use circuit breaker behavior
+
+- Add circuit breakers to strangled app
+- Normal flow: existing behavior wrapped by circuit breakers
+- Next: parallelize calls: one call to existing behavior, one to strangler app.  If they are different, report the difference and use the existing behavior.
+- Moving on: switch default circuit breaker call to use the strangler app.  Fallback is existing strangled app behavior.
+- Finally: clean up the fallback to provide actual fallback, removing old code from strangled app.
+
+* Strangling in a conservative environment
+It's a long process but allows careful migration to new service with minimal risk.
+
+* Strangling in action
+
+* Existing app
+Toy Ruby app - let's replace with Go!
+
+* Endpoints in Ruby
+- GET /v1/user
+- GET /v1/user/{id}
+
+* Ruby code
+  get "/v1/user" do
+    content_type :json
+    $users.to_json
+  end
+
+  get "/v1/user/:id" do
+    content_type :json
+    user = get_user_by_id(params[:id].to_i)
+    if user != nil
+      return user.to_json
+    end
+    return 404
+  end
+
+* Endpoint to cut over
+- GET /v1/user/{id} - add more Golang
+
+* Ruby code
+
+  get "/v1/user/:id" do
+    if ($delegate_user_call)
+      # call golang endpoint and return it
+    end
+
+    content_type :json
+    user = get_user_by_id(params[:id].to_i)
+    if user != nil
+      return user.to_json
+    end
+    return 404
+  end
+
+* Golang code
+  r = mux.NewRouter()
+  r.HandleFunc("/v1/users/{id}", UserHandler)
+snip
+
+  func UserHandler(w http.ResponseWriter, r *http.Request) {
+  	id, err := strconv.Atoi(mux.Vars(r)["id"])
+  	if err != nil {
+        // error handling...
+  	}
+  	user, err := findUser(id)
+
+  	if err != nil {
+        // error handling...
+  	}
+  	fmt.Fprintf(w, user) // return user as json
+  }
+
+
+* Demo all Ruby with cucumber tests
+
+* Demo strangling Ruby with cucumber tests
+
+* Two ways of strangling
+- Proxy
+- Delegation
+
+* Proxy
+.image proxy.png
+
+* Proxy
+Make a new service that has every endpoint the to-be-strangled service has.
+
+Proxy calls back to the original service.
+
+Switch clients early to new service.
+
+Move functionality into this new service chunks at a time, removing dependency on strangled service.
+
+* Delegation
+.image delegate.png
+
+* Delegation
+This is what we just did.
+
+Modifications are done to the to-be-strangled service: delegate calls to the new service.
+
+Still transfer responsibility in chunks.
+
+When all functionality is in the new service, clients do a big switch to the new service.
+
+* Proxy or delegation?
+
+Figure out what fits best in your environment.
+
+If in doubt, go with the proxying pattern.  The client's big switch to a new service might be rough.
+
+* Recap
+- Strangle slowly
+- Use tests
+- Circuit breakers
+- Feature toggles
+- Proxy or delegate
+
+* Questions, comments
+
+* BONUS SLIDE
+
+DualSpark is hiring.  Tackle large scope, interesting problems by helping customers migrate to AWS.
+
+Interested? Let's talk, here or via email.
