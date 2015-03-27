@@ -18,7 +18,7 @@ get "/v1/user/:id" do
   if (@@delegate_user_call)
     # call golang endpoint and return it
     url = URI.parse('http://localhost:8080/v1/users/' << params[:id])
-    req = Net::HTTP::Get.new(url)
+    req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)
     }

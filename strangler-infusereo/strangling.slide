@@ -29,11 +29,20 @@ http://dualspark.com
 .link http://www.martinfowler.com/bliki/StranglerApplication.html http://www.martinfowler.com/bliki/StranglerApplication.html
 Gradually create a new system over the existing one, taking over responsibility
 
+* Why strangle an application?
+
+* Why strangle an application?
+
+- Improve performance
+- Split a monolith into microservices
+- Switch languages
+- Migration from on-premise to cloud
+
 * Keys for effective strangling
-- List of goals for strangling: performance, splitting a monolith into microservices, switching languages
+- List of goals for strangling
 - Strong monitoring
 - Smooth deployment pipeline
-- Strong testing coverage
+- Strong test coverage
 
 * Two ways of strangling
 - Proxy
@@ -109,6 +118,8 @@ Cucumber:
     expect(body['id']).to eq(user_id.to_i)
   end
 
+* We'll see more cucumber in action soon
+
 * Strangling in a conservative environment
 Use circuit breaker behavior
 
@@ -121,7 +132,7 @@ Use circuit breaker behavior
 * Strangling in a conservative environment
 It's a long process but allows careful migration to new service with minimal risk.
 
-* Let's get traction: strangling in action
+* Strangling in action
 
 * Existing app
 Toy Ruby app - let's replace with Go!
@@ -191,6 +202,9 @@ snip
 - Delegation
 
 * Proxy
+.image proxy.png
+
+* Proxy
 Make a new service that has every endpoint the to-be-strangled service has.
 
 Proxy calls back to the original service.
@@ -198,6 +212,9 @@ Proxy calls back to the original service.
 Switch clients early to new service.
 
 Move functionality into this new service chunks at a time, removing dependency on strangled service.
+
+* Delegation
+.image delegate.png
 
 * Delegation
 This is what we just did.
@@ -212,7 +229,7 @@ When all functionality is in the new service, clients do a big switch to the new
 
 Figure out what fits best in your environment.
 
-If in doubt, go with the proxying pattern.  The big switch to a new service might be rough.
+If in doubt, go with the proxying pattern.  The client's big switch to a new service might be rough.
 
 * Recap
 - Strangle slowly
