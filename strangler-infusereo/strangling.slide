@@ -39,6 +39,14 @@ Gradually create a new system over the existing one, taking over responsibility
 - Proxy
 - Delegation
 
+* Proxy
+
+.image proxy.png
+
+* Delegation
+
+.image delegate.png
+
 * Easy mode with RESTful API
 - If the application to be strangled has REST or REST-like endpoints, delegate calls to new service
 
