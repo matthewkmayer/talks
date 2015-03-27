@@ -11,7 +11,7 @@ http://dualspark.com
 
 * Slides available on GitHub
 
-https://github.com/matthewkmayer/talks
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
 
 - the "k" is important in the URL: Look for a bunch of Golang projects and a shameful .NET one.
 - *strangler-infusereo* directory
@@ -34,6 +34,10 @@ Gradually create a new system over the existing one, taking over responsibility
 - Strong monitoring
 - Smooth deployment pipeline
 - Strong testing coverage
+
+* Two ways of strangling
+- Proxy
+- Delegation
 
 * Easy mode with RESTful API
 - If the application to be strangled has REST or REST-like endpoints, delegate calls to new service

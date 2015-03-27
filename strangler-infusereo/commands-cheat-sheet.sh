@@ -9,11 +9,12 @@ ruby ruby-service.rb &
 # cuke tests:
 cucumber
 
-
 # Demoing strangler:
-# Compile golang service:
+killall ruby
+# Flip feature toggle in ruby service
 
 # run them both:
+ruby ruby-service.rb & ./strangler &
 
 # cucumber tests still work:
 cucumber

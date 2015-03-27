@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sudo apt-get install -y ruby-dev gccgo-go
+sudo apt-get install -y ruby-dev
 sudo gem install sinatra cucumber json rspec
