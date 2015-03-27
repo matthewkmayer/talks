@@ -4,21 +4,21 @@ require 'net/http'
 
 set :port, 9494
 
-$users=[{name: 'foo', id: 1}]
+@@users=[{name: 'foo', id: 1}]
 
-$delegate_user_call=false
+@@delegate_user_call=false
 
 get "/v1/user" do
   content_type :json
-  $users.to_json
+  @@users.to_json
 end
 
 get "/v1/user/:id" do
   content_type :json
-  if ($delegate_user_call)
+  if (@@delegate_user_call)
     # call golang endpoint and return it
-    url = URI.parse('http://localhost:8080/v1/users/' + params[:id].to_s)
-    req = Net::HTTP::Get.new(url.to_s)
+    url = URI.parse('http://localhost:8080/v1/users/' << params[:id])
+    req = Net::HTTP::Get.new(url)
     res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)
     }
@@ -26,12 +26,9 @@ get "/v1/user/:id" do
   end
 
   user = get_user_by_id(params[:id].to_i)
-  if user != nil
-    return user.to_json
-  end
-  return 404
+  return (user.nil? ? 404 : user.to_json)
 end
 
 def get_user_by_id (id)
-  $users.find{|user| user[:id] == id}
+  @@users.find{|user| user[:id] == id}
 end
