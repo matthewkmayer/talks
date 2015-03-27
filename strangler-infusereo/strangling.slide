@@ -164,7 +164,23 @@ Toy Ruby app - let's replace with Go!
   end
 
 * Golang code
-Handle the user endpoints
+  r = mux.NewRouter()
+  r.HandleFunc("/v1/users/{id}", UserHandler)
+snip
+
+  func UserHandler(w http.ResponseWriter, r *http.Request) {
+  	id, err := strconv.Atoi(mux.Vars(r)["id"])
+  	if err != nil {
+        // error handling...
+  	}
+  	user, err := findUser(id)
+
+  	if err != nil {
+        // error handling...
+  	}
+  	fmt.Fprintf(w, user) // return user as json
+  }
+
 
 * Demo all Ruby with cucumber tests
 
