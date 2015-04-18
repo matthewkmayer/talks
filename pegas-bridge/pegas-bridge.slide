@@ -25,7 +25,9 @@ https://github.com/matthewkmayer/talks
 
 * Target audience
 
-Agile coaches, managers of Agile or soon-to-be Agile teams.
+- Agile coaches
+- managers of Agile
+- soon-to-be Agile teams.
 
 * Definition
 
@@ -132,6 +134,12 @@ For more guidance, Agile Fluency can help concentrate effort on where to go next
 
 * Keep reaching for the goals
 
+* Your role in the transformation
+
+- Keep the high altitude view
+- Defend the team's progress
+- Keep the team empowered
+
 * Well, that was light on detail
 
 I know, I know.  Let's go deeper.
@@ -203,18 +211,31 @@ oh hey, it's devops!
 
 * Get feedback faster
 
+Faster releases means customers see features faster.
 
+- Use direct interaction with customers
+- Use indirect measures with metrics
 
 * Limit work in progress
 
-Easier with small tasks: they rarely get blocked.
+Life is easier with small tasks: they rarely get blocked.
 
 * Don't silo information and knowledge
 
 Pair program.
 
+* Spread knowledge through the team
 
+- Pair devs on tasks they don't know well.
+- Pair dev and QA.
 
+* When knowledge is spread, people taking vacation or being unavailable becomes less of an issue.
+
+* Take away points
+
+- Determine desired destination and start moving towards it
+- Check progress regularly to ensure progress
+- Empower the delivery team to make the changes they want to
 
 * Notes/Highlights?
 
@@ -228,9 +249,3 @@ Pair program.
 - agile fluency
 - resources/links
 - tie in devops?
-
-* BONUS SLIDE
-
-DualSpark is hiring.  Tackle large scope, interesting problems by helping customers migrate to AWS.
-
-Interested? Let's talk, here or via email.
