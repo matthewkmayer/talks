@@ -27,7 +27,7 @@ https://github.com/matthewkmayer/talks
 
 - Agile coaches
 - managers of Agile
-- soon-to-be Agile teams.
+- soon-to-be Agile teams
 
 * Definition
 
@@ -230,6 +230,20 @@ Pair program.
 - Pair dev and QA.
 
 * When knowledge is spread, people taking vacation or being unavailable becomes less of an issue.
+
+* Fear of change
+
+- Automation of QA tests can scare QA team members
+- Automation of deployment steps can scare operations members
+- Pair programming can scare everyone
+
+* There's always work to be done
+
+There's:
+
+- Always more tests to write
+- Always process improvements in deployment
+- Always more topics to learn
 
 * Take away points
 
