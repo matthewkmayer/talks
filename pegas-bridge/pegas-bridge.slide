@@ -1,4 +1,4 @@
-Bridging Agile understanding to software engineers
+Bridging Agile understanding to delivery teams
 Speaking their language
 17 Apr 2015
 Tags: Agile,
@@ -24,9 +24,201 @@ https://github.com/matthewkmayer/talks
 - Super keen on agile software development
 - Obligatory "DevOps fan" bullet point
 
-* What?
+* Target audience
 
-- topics!
+Agile coaches, managers of Agile or soon-to-be Agile teams.
+
+* Problem
+
+Delivery team can be hard to convince to do Agile, especially the more technically focused ones.
+
+* Explaining the benefits
+
+Pro-Agile folks, or Agile-curious, have knowledge or understanding about how and why Agile practices can make better products.
+
+Explaining this can be hard.
+
+* What happens
+
+Higher-ups in a company dictate the company is now Agile.
+
+Those who delivery software are often given no guidance, knowledge or support.
+
+* Point everyone in the right direction
+
+You're dumped into a situation where a team needs to increase their agility.
+
+Start 'em off right: Agile Manifesto.
+
+(Manifesto here)
+
+* Disregard current situation and daydream
+
+Where do we want to be?  Ignore how to get there for now.
+
+* Disregard current situation and daydream
+
+- For a SaaS company, it may be continuous, automated deployment.
+- For an installed product: automatic, twice-a-day updates.
+
+* Current location established, destination selected
+
+Have the delivery team brainstorm on how they can get to where they want to be.
+
+Many paths will be presented: the team should debate and select the one that looks best.
+
+* Start
+
+This can be difficult: the small step towards increasing agility may meet immediate resistance.
+
+But *start*.
+
+* Example
+
+If there's no centralized build server, members of the team should provision one and the entire team should use it.
+
+* Keep moving forward
+
+However work is organized, sprints, iterations, continuous delivery, time should be allocated to making progress towards the team's goals.
+
+- Made a build server last week?  Ensure the team's projects are running on it automatically.
+- Builds running automatically?  How about unit tests?
+- Unit tests work, next do integration tests.
+
+Just keep chipping away.
+
+* Reflect
+
+Retrospectives are required: the team should check progress towards their destination.
+
+Course corrections are made easy when performed early.
+
+* When in doubt
+
+The Agile Manifesto will provide guidance...
+
+but the customer is king.  Make sure they are satisfied.
+
+* Accelerate
+
+Once the foundation is set, work towards improving agility will pick up steam.
+
+In our example team, they went from no centralized build server to one that runs builds automatically, runs unit tests and integration tests.
+
+With automated testing in place, parts of the delivery team are freed from manual actions to perform tasks that deliver value to customers.
+
+Think working on more stories, doing more prototyping of ideas and increasing test coverage.
+
+* Don't stop
+
+Keep momentum.
+
+Customers see more, higher-quality features in their product.  Bugs are caught before they reach customers.
+
+But there's more to do.
+
+* Agile Fluency
+
+For more guidance, Agile Fluency can help concentrate effort on where to go next.
+
+* Keep reaching for the goals
+
+* Well, that was light on detail
+
+I know, I know.  Let's go deeper.
+
+* Effective actions for teams
+
+- Slice stories into much smaller stories
+- Do painful things often
+- Deliver faster
+- Get feedback faster
+- Limit work in progress
+- Don't silo information and knowledge
+
+* Slice stories into much smaller stories
+
+Anyone seen a sprint where all dev tasks are in progress until the last day of the sprint, when it's "released" to QA?
+
+How does QA feel about that?  I know how I would feel in those shoes!
+
+* Slicing guidelines
+
+- If a story is going to take more than two days, trim it down.
+- Take the simplest thing that could possibly work in tough spots and create a ticket or task to flesh it out.  But deliver the story.
+
+* Slicing resources
+
+- Hamburger sizing
+- Take on tiny technical debt that will be solved in the same sprint or iteration
+
+* Slicing is effective
+
+QA will love having tasks to test throughout the sprint instead of a feast or famine approach.
+
+Customers will quickly get value from the work, instead of holding onto it for a big release.
+
+There will be palpable momentum in the team.
+
+* Slicing story time
+
+(Client side database sharding)
+
+* Do painful things often
+
+We all want to avoid pain.  By doing painful things more often, the rough spots will be identified.
+
+Once identified, they can be addressed.
+
+* Painful releases
+
+If releasing software to customers is painful, find the worst spot and fix it.
+
+Is it a manual process with lots of clicking?  Automate it.
+
+Are releases big and often have bugs?  Go to smaller releases with less changes.
+
+Are parts of the process slow?  How can they be sped up?
+
+* Painful release story time
+
+(Big, mission-critical service called a banana)
+
+* Deliver faster
+
+oh hey, it's devops!
+
+* Get feedback faster
+
+
+
+* Limit work in progress
+
+Easier with small tasks: they rarely get blocked.
+
+* Don't silo information and knowledge
+
+Pair program.
+
+
+
+
+* Notes/Highlights?
+
+- Talk about the bridging I do: agile to engineers (including QA!)
+- why it’s good (especially for QA)
+- how: slicing tickets, faster delivery, faster feedback loops, continuous delivery
+- challenges in the position and how to tackle them
+- addressing fear of change
+- coach's or manager's job is to allow team to become more agile: may need to defend team and practices
+- tie into agile manifesto
+- agile fluency
+- resources/links
+- tie in devops?
+
+* Definition
+
+Delivery team is: product owner, developers, QA, ops. Scrum team!
 
 * BONUS SLIDE
 
