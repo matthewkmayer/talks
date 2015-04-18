@@ -18,15 +18,20 @@ https://github.com/matthewkmayer/talks
 
 * Who am I?
 
- (NEEDS REWORK)
 - Jack of all trades
 - Written, implemented and maintained microservices in the cloud
 - Super keen on agile software development
-- Obligatory "DevOps fan" bullet point
+- DevOps fan
 
 * Target audience
 
 Agile coaches, managers of Agile or soon-to-be Agile teams.
+
+* Definition
+
+A delivery team consists of a product owner, developers, QA, operations.
+
+Think Scrum team.
 
 * Problem
 
@@ -93,6 +98,10 @@ Retrospectives are required: the team should check progress towards their destin
 
 Course corrections are made easy when performed early.
 
+Ensure the team is seeing benefits to the work done.  If not, ask why, five times.
+
+(Five whys link)
+
 * When in doubt
 
 The Agile Manifesto will provide guidance...
@@ -149,7 +158,7 @@ How does QA feel about that?  I know how I would feel in those shoes!
 
 * Slicing resources
 
-- Hamburger sizing
+- Hamburger sizing (Link, picture here)
 - Take on tiny technical debt that will be solved in the same sprint or iteration
 
 * Slicing is effective
@@ -188,6 +197,10 @@ Are parts of the process slow?  How can they be sped up?
 
 oh hey, it's devops!
 
+* Deliver faster story time
+
+(Pushing out bug fixes quickly)
+
 * Get feedback faster
 
 
@@ -215,10 +228,6 @@ Pair program.
 - agile fluency
 - resources/links
 - tie in devops?
-
-* Definition
-
-Delivery team is: product owner, developers, QA, ops. Scrum team!
 
 * BONUS SLIDE
 
