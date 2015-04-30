@@ -49,7 +49,7 @@ Explaining this can be hard.
 
 Higher-ups in a company dictate the company is now Agile.
 
-Those who delivery software are often given no guidance, knowledge or support.
+Those who deliver software are often given no guidance, knowledge or support.
 
 * Point everyone in the right direction
 
@@ -57,7 +57,7 @@ You're dumped into a situation where a team needs to increase their agility.
 
 Start 'em off right: Agile Manifesto.
 
-(Manifesto here)
+.link http://agilemanifesto.org http://agilemanifesto.org
 
 * Disregard current situation and daydream
 
@@ -102,7 +102,38 @@ Course corrections are made easy when performed early.
 
 Ensure the team is seeing benefits to the work done.  If not, ask why, five times.
 
-(Five whys link)
+.link http://en.wikipedia.org/wiki/5_Whys http://en.wikipedia.org/wiki/5_Whys
+
+* Reflecting with five whys
+
+Wikipedia example:
+
+  The vehicle will not start. (the problem)
+    Why? - The battery is dead. (first why)
+    Why? - The alternator is not functioning. (second why)
+    Why? - The alternator belt has broken. (third why)
+    Why? - The alternator belt was well beyond its useful service life and not replaced. (fourth why)
+    Why? - The vehicle was not maintained according to the recommended service schedule. (fifth why, a root cause)
+
+* Reflecting with five whys
+
+Wikipedia example:
+
+  The vehicle will not start. (the problem)
+    Why? - The battery is dead. (first why)
+    Why? - The alternator is not functioning. (second why)
+    Why? - The alternator belt has broken. (third why)
+    Why? - The alternator belt was well beyond its useful service life and not replaced. (fourth why)
+    Why? - The vehicle was not maintained according to the recommended service schedule. (fifth why, a root cause)
+
+Team not seeing benefits example:
+
+  We've put work into being agile, but it's not helping quality.
+    Why? - The technical process is streamlined, but there's organizational opposition. (first)
+    Why? - Historically the team has delivered buggy software. (second)
+    Why? - Releases were big and not well tested. (third)
+    Why? - Technical issues around testing and releasing being difficult. (fourth)
+    Why? - Not enough resources being put into it. (fifth, root cause)
 
 * When in doubt
 
@@ -131,6 +162,8 @@ But there's more to do.
 * Agile Fluency
 
 For more guidance, Agile Fluency can help concentrate effort on where to go next.
+
+.image fluency.png
 
 * Keep reaching for the goals
 
@@ -166,8 +199,13 @@ How does QA feel about that?  I know how I would feel in those shoes!
 
 * Slicing resources
 
-- Hamburger sizing (Link, picture here)
-- Take on tiny technical debt that will be solved in the same sprint or iteration
+.link http://gojko.net/2012/01/23/splitting-user-stories-the-hamburger-method/ Hamburger sizing
+
+.image hamburger_step_4.png
+
+* Slicing resources
+
+Take on tiny technical debt that will be solved in the same sprint or iteration
 
 * Slicing is effective
 
@@ -204,6 +242,10 @@ Are parts of the process slow?  How can they be sped up?
 * Deliver faster
 
 oh hey, it's devops!
+
+* Deliver faster
+
+Automate, automate, automate.
 
 * Deliver faster story time
 
@@ -251,15 +293,9 @@ There's:
 - Check progress regularly to ensure progress
 - Empower the delivery team to make the changes they want to
 
-* Notes/Highlights?
+* Links and resources
 
-- Talk about the bridging I do: agile to engineers (including QA!)
-- why it’s good (especially for QA)
-- how: slicing tickets, faster delivery, faster feedback loops, continuous delivery
-- challenges in the position and how to tackle them
-- addressing fear of change
-- coach's or manager's job is to allow team to become more agile: may need to defend team and practices
-- tie into agile manifesto
-- agile fluency
-- resources/links
-- tie in devops?
+.link http://agilemanifesto.org/ http://agilemanifesto.org/
+.link https://www.atlassian.com/agile/kanban https://www.atlassian.com/agile/kanban
+.link https://labs.spotify.com/2014/03/27/spotify-engineering-culture-part-1/ https://labs.spotify.com/2014/03/27/spotify-engineering-culture-part-1/
+.link http://martinfowler.com/articles/agileFluency.html http://martinfowler.com/articles/agileFluency.html
