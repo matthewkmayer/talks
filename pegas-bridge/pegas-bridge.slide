@@ -26,30 +26,30 @@ https://github.com/matthewkmayer/talks
 * Target audience
 
 - Agile coaches
-- managers of Agile
-- soon-to-be Agile teams
+- managers of Agile teams
+- managers of soon-to-be Agile teams
 
 * Definition
 
 A delivery team consists of a product owner, developers, QA, operations.
 
-Think Scrum team.
+Think "Scrum team" or the group of people needed to take a product from concept to delivered software.
 
 * Problem
 
 Delivery team can be hard to convince to do Agile, especially the more technically focused ones.
-
-* Explaining the benefits
-
-Pro-Agile folks, or Agile-curious, have knowledge or understanding about how and why Agile practices can make better products.
-
-Explaining this can be hard.
 
 * What happens
 
 Higher-ups in a company dictate the company is now Agile.
 
 Those who deliver software are often given no guidance, knowledge or support.
+
+* Explaining the benefits
+
+Pro-Agile folks, or just Agile-curious, have knowledge or understanding about how and why Agile practices can make better products.
+
+Explaining the nuts and bolts of how to implement this can be hard.
 
 * Point everyone in the right direction
 
@@ -61,7 +61,12 @@ Start 'em off right: Agile Manifesto.
 
 * Disregard current situation and daydream
 
-Where do we want to be?  Ignore how to get there for now.
+The team knows where they're at now.
+
+Ask:
+
+- What are our pain points?
+- Where do we want to be?
 
 * Disregard current situation and daydream
 
@@ -72,7 +77,7 @@ Where do we want to be?  Ignore how to get there for now.
 
 Have the delivery team brainstorm on how they can get to where they want to be.
 
-Many paths will be presented: the team should debate and select the one that looks best.
+Many options will be presented: the team should debate and select the one that looks best.
 
 * Start
 
@@ -109,22 +114,22 @@ Ensure the team is seeing benefits to the work done.  If not, ask why, five time
 Wikipedia example:
 
   The vehicle will not start. (the problem)
-    Why? - The battery is dead. (first why)
-    Why? - The alternator is not functioning. (second why)
-    Why? - The alternator belt has broken. (third why)
-    Why? - The alternator belt was well beyond its useful service life and not replaced. (fourth why)
-    Why? - The vehicle was not maintained according to the recommended service schedule. (fifth why, a root cause)
+    Why? The battery is dead. (1st why)
+    Why? The alternator is not functioning. (2nd why)
+    Why? The alternator belt has broken. (3rd why)
+    Why? The alternator belt was well beyond its useful service life and not replaced. (4th why)
+    Why? Vehicle was not maintained according to the recommended service schedule. (5th, root cause)
 
 * Reflecting with five whys
 
 Wikipedia example:
 
   The vehicle will not start. (the problem)
-    Why? - The battery is dead. (first why)
-    Why? - The alternator is not functioning. (second why)
-    Why? - The alternator belt has broken. (third why)
-    Why? - The alternator belt was well beyond its useful service life and not replaced. (fourth why)
-    Why? - The vehicle was not maintained according to the recommended service schedule. (fifth why, a root cause)
+    Why? The battery is dead. (1st why)
+    Why? The alternator is not functioning. (2nd why)
+    Why? The alternator belt has broken. (3rd why)
+    Why? The alternator belt was well beyond its useful service life and not replaced. (4th why)
+    Why? Vehicle was not maintained according to the recommended service schedule. (5th, root cause)
 
 Team not seeing benefits example:
 
@@ -286,6 +291,38 @@ There's:
 - Always more tests to write
 - Always process improvements in deployment
 - Always more topics to learn
+
+* Antipatterns
+
+- Siloing of knowledge and power
+- Non-technical people making technical decisions
+- Poor cross-team communication
+
+* Siloing of knowledge and power
+
+If a team isn't empowered to take control and fix something, their agile journey is going to run into a wall sooner rather than later.
+
+* Siloing of knowledge and power
+
+(Story time: "database" team unable to provide latest version of a database)
+
+* Non-technical people making technical decisions
+
+Forcing a square peg into a round hole will lower velocity, increase frustration and cause extra work.
+
+* Non-technical people making technical decisions
+
+(Story time: diktat of "NoSQL")
+
+* Poor cross-team communication
+
+- Duplication of effort
+- No sense of community
+- Losing opportunities for collaboration and knowledge sharing
+
+* Poor cross-team communication
+
+(Story time: duplication of effort for how to use a service discovery provider)
 
 * Take away points
 
