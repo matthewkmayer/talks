@@ -178,9 +178,7 @@ For more guidance, Agile Fluency can help concentrate effort on where to go next
 - Defend the team's progress
 - Keep the team empowered
 
-* Well, that was light on detail
-
-I know, I know.  Let's go deeper.
+* Let's go deeper.
 
 * Effective actions for teams
 
@@ -190,6 +188,7 @@ I know, I know.  Let's go deeper.
 - Get feedback faster
 - Limit work in progress
 - Don't silo information and knowledge
+- Make the tools work for the team
 
 * Slice stories into much smaller stories
 
@@ -292,6 +291,25 @@ There's:
 - Always process improvements in deployment
 - Always more topics to learn
 
+* Make the tools work for the team
+
+Anyone spend more time in their ticket system than doing actual work?  Ever heard a complaint about time spent herding tickets?
+
+Allow the team to switch it up.  Their goal is to deliver value to customers, not provide metrics to the company.
+
+Have the team figure out what fits their needs:
+
+- Separate issue tracking software than parent group
+- GitHub issues
+- Sticky notes
+- 3x5 cards passed between people
+
+* Make the tools work for the team
+
+If the team views the tools are getting in the way of doing work, the problem needs to be fixed.
+
+"The tools work for us, we don't work for the tools."
+
 * Antipatterns
 
 - Siloing of knowledge and power
@@ -326,8 +344,8 @@ Forcing a square peg into a round hole will lower velocity, increase frustration
 
 * Take away points
 
-- Determine desired destination and start moving towards it
-- Check progress regularly to ensure progress
+- With the team, determine desired destination and start moving towards it
+- Check direction and location regularly to ensure progress
 - Empower the delivery team to make the changes they want to
 
 * Links and resources
