@@ -1,4 +1,4 @@
-Agile PDX Lean Coffee
+AgilePDX Lean Coffee
 Beyond the frameworks
 16 Sep 2015
 Tags: Agile, lean
@@ -21,6 +21,12 @@ https://github.com/matthewkmayer/talks
 - Topics created, voted on and discussed by group members
 - Continue discussion voting
 - Kanban used for organization: to discuss, discussing, discussed
+
+* Kanban refresher
+
+.image kanban.jpg
+
+(Thanks to leancoffee.org for the image)
 
 * Scaling Lean coffee
 
@@ -58,6 +64,25 @@ Once the time limit is reached, each group member votes to either continue talki
 
 If a new topic is to be selected, move the "discussing" item to "discussed" and move the next highest ranked topic from "to discuss" to "discussing."
 
+* Topic refresher
+
+  Following up on the topics that emerged among attendees at the “State of Agile”
+  discussion at Puppet Labs gathering on 6/17, we’ll dig into what we think it
+  means to be Agile disregarding the constraints and supports of the three most
+  common frameworks currently in use. In some quarters, the term “agile” is being
+  deprecated in favor of “nimble;” in others, the term “business agility” is
+  increasingly favored. The case was made on 6/17 that Agile as we know it
+  doesn’t speak to the needs of the enterprise outside of IT or engineering,
+  and, especially, senior business leaders do not show up as what we often
+  think of as agilists.
+
+  So, what’s under Scrum, XP, and Kanban? What about the manifesto and
+  principles can we grasp as tools to operationalize agility wherever we
+  are — without spouting Scrumese or Agile cuteness. How do we both grow
+  ourselves as agilists and as a community and support our colleagues toward
+  a more mature grasp of Agile and Lean. Or, is Agile passe and do only the
+  consultants and behemoth enterprises not know that, yet?
+
 * Let's go!
 
 - Groups of four to six
@@ -88,3 +113,9 @@ If a new topic is to be selected, move the "discussing" item to "discussed" and 
 Each group picks the topic they got the most out of and shares their findings to the larger group.
 
 C'mon up and take the mic!
+
+* Bonus round, time permitting
+
+Let's take another few minutes for refreshments, networking and relaxing.
+
+Then feel free to form groups and continue the lean coffee discussions.
