@@ -1,11 +1,11 @@
-Bridging Agile understanding to delivery teams
-Speaking their language
+Agile building blocks for teams
+Bridging between technical and non technical
 17 Apr 2015
 Tags: Agile,
 
 Matthew Mayer
-Consultant Developer, DualSpark
-matthew@dualspark.com
+Senior Consultant, DataPipe
+mmayer@datapipe.com
 http://dualspark.com
 @motoblag
 
@@ -28,6 +28,8 @@ https://github.com/matthewkmayer/talks
 - Agile coaches
 - managers of Agile teams
 - managers of soon-to-be Agile teams
+
+The talk will be assuming a passing technical familiarity with some tools and concepts.
 
 * Definition
 
@@ -283,6 +285,12 @@ Pair program.
 - Automation of deployment steps can scare operations members
 - Pair programming can scare everyone
 
+* A common source of fear
+
+Quite often, people see automation of their daily tasks as a threat to their job stability.
+
+This fear can be assuaged by the fact that...
+
 * There's always work to be done
 
 There's:
@@ -310,6 +318,18 @@ If the team views the tools are getting in the way of doing work, the problem ne
 
 "The tools work for us, we don't work for the tools."
 
+* <record scratch>
+
+* Remember this slide?
+
+Your role in the transformation
+
+- Keep the high altitude view
+- Defend the team's progress
+- Keep the team empowered
+
+Switching to a different set of tools may be one of the biggest challenges in keeping the team empowered and making progress.
+
 * Quick and dirty progress report
 
 Is the team's "Joel score" improving?
@@ -336,6 +356,7 @@ Is the team's "Joel score" improving?
 - Siloing of knowledge and power
 - Non-technical people making technical decisions
 - Poor cross-team communication
+- Confusing motion for progress
 
 * Siloing of knowledge and power
 
@@ -363,11 +384,26 @@ Forcing a square peg into a round hole will lower velocity, increase frustration
 
 (Story time: duplication of effort for how to use a service discovery provider)
 
+* Confusing motion for progress
+
+Just because people are busy or policies are always changing doesn't mean things are *getting* *done* or getting *better*.
+
+Understand what getting things done means for your group, your company, your customers and align your actions.
+
+* What to do if you're lost
+
+(Story time: asking what a company's SDLC is to their senior developers and technical managers)
+
+* What to do if you're lost
+
+It's okay to be lost!  As long as the next steps involve opening eyes, seeing the environment and starting to make progress, you'll be improving things.
+
 * Take away points
 
 - With the team, determine desired destination and start moving towards it
 - Check direction and location regularly to ensure progress
 - Empower the delivery team to make the changes they want to
+- Encourage everyone involved to keep learning!
 
 * Links and resources
 
