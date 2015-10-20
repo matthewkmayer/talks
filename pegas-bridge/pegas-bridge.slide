@@ -4,7 +4,7 @@ Bridging between technical and non technical
 Tags: Agile,
 
 Matthew Mayer
-Senior Consultant, DataPipe
+Senior Consultant, Datapipe
 mmayer@datapipe.com
 http://dualspark.com
 @motoblag
@@ -36,6 +36,10 @@ The talk will be assuming a passing technical familiarity with some tools and co
 A delivery team consists of a product owner, developers, QA, operations.
 
 Think "Scrum team" or the group of people needed to take a product from concept to delivered software.
+
+* Two
+
+* Part one: high level rehash
 
 * Problem
 
@@ -74,6 +78,8 @@ Ask:
 
 - For a SaaS company, it may be continuous, automated deployment.
 - For an installed product: automatic, twice-a-day updates.
+
+* May need outside POV
 
 * Current location established, destination selected
 
@@ -136,11 +142,11 @@ Wikipedia example:
 Team not seeing benefits example:
 
   We've put work into being agile, but it's not helping quality.
-    Why? - The technical process is streamlined, but there's organizational opposition. (first)
-    Why? - Historically the team has delivered buggy software. (second)
-    Why? - Releases were big and not well tested. (third)
-    Why? - Technical issues around testing and releasing being difficult. (fourth)
-    Why? - Not enough resources being put into it. (fifth, root cause)
+    Why? - The technical process is streamlined, but there's organizational opposition. (1st)
+    Why? - Historically the team has delivered buggy software. (2nd)
+    Why? - Releases were big and not well tested. (3rd)
+    Why? - Technical issues around testing and releasing being difficult. (4th)
+    Why? - Not enough resources being put into it. (5th, root cause)
 
 * When in doubt
 
@@ -181,6 +187,8 @@ For more guidance, Agile Fluency can help concentrate effort on where to go next
 - Keep the team empowered
 
 * Let's go deeper.
+
+* Part two: the heart of the matter
 
 * Effective actions for teams
 
@@ -330,6 +338,67 @@ Your role in the transformation
 
 Switching to a different set of tools may be one of the biggest challenges in keeping the team empowered and making progress.
 
+* Antipatterns
+
+- Siloing of knowledge and power
+- Non-technical people making technical decisions
+- Poor cross-team communication
+- Confusing motion for progress
+
+* Siloing of knowledge and power
+
+If a team isn't empowered to take control and fix something, their agile journey is going to run into a wall sooner rather than later.
+
+* Siloing of knowledge and power
+
+(Story time: "database" team unable to provide latest version of a database)
+
+* Fixing siloing of knowledge and power
+
+- Pair programming across teams
+- Ask if help would be nice
+- If nothing else, try fixing it and asking for forgiveness
+
+* Non-technical people making technical decisions
+
+Forcing a square peg into a round hole will lower velocity, increase frustration and cause extra work.
+
+* Non-technical people making technical decisions
+
+(Story time: diktat of "NoSQL")
+
+* Fixing non-technical people making technical decisions
+
+Uphill battle, but fight tooth and nail for the right solution.
+
+Back up with data if possible.
+
+* Poor cross-team communication
+
+- Duplication of effort
+- No sense of community
+- Losing opportunities for collaboration and knowledge sharing
+
+* Poor cross-team communication
+
+(Story time: duplication of effort for how to use a service discovery provider)
+
+* Fixing poor cross-team communication
+
+- Occupy other teams
+- Do tours of duties with other teams
+- Technological tools: Slack, Hipchat, IRC, etc... Get people talking together
+
+* Confusing motion for progress
+
+Just because people are busy or policies are always changing doesn't mean things are *getting* *done* or getting *better*.
+
+Understand what getting things done means for your group, your company, your customers and align your actions.
+
+* Fixing confusing motion for progress
+
+Look back at what your customers need, align efforts towards that.
+
 * Quick and dirty progress report
 
 Is the team's "Joel score" improving?
@@ -351,45 +420,6 @@ Is the team's "Joel score" improving?
   Do new candidates write code during their interview?
   Do you do hallway usability testing?
 
-* Antipatterns
-
-- Siloing of knowledge and power
-- Non-technical people making technical decisions
-- Poor cross-team communication
-- Confusing motion for progress
-
-* Siloing of knowledge and power
-
-If a team isn't empowered to take control and fix something, their agile journey is going to run into a wall sooner rather than later.
-
-* Siloing of knowledge and power
-
-(Story time: "database" team unable to provide latest version of a database)
-
-* Non-technical people making technical decisions
-
-Forcing a square peg into a round hole will lower velocity, increase frustration and cause extra work.
-
-* Non-technical people making technical decisions
-
-(Story time: diktat of "NoSQL")
-
-* Poor cross-team communication
-
-- Duplication of effort
-- No sense of community
-- Losing opportunities for collaboration and knowledge sharing
-
-* Poor cross-team communication
-
-(Story time: duplication of effort for how to use a service discovery provider)
-
-* Confusing motion for progress
-
-Just because people are busy or policies are always changing doesn't mean things are *getting* *done* or getting *better*.
-
-Understand what getting things done means for your group, your company, your customers and align your actions.
-
 * What to do if you're lost
 
 (Story time: asking what a company's SDLC is to their senior developers and technical managers)
@@ -403,7 +433,7 @@ It's okay to be lost!  As long as the next steps involve opening eyes, seeing th
 - With the team, determine desired destination and start moving towards it
 - Check direction and location regularly to ensure progress
 - Empower the delivery team to make the changes they want to
-- Encourage everyone involved to keep learning!
+- Encourage everyone involved to keep learning
 
 * Links and resources
 
