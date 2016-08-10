@@ -1,0 +1,32 @@
+Testing pyramid
+Unit, integration, functional, behavior
+08 Aug 2016
+Tags: Testing
+
+Matthew Mayer
+Senior Developer, Ion Channel
+matthewkmayer@gmail.com
+http://ionchannel.io
+@motoblag
+
+* Slides available on GitHub
+
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL: Look for a bunch of Golang projects and a shameful .NET one.
+
+* Who am I?
+
+- Jack of all trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+- Obligatory "DevOps fan" bullet point
+
+* Testing pyramid
+
+- unit tests
+- integration tests
+- functional tests
+- behavior tests
+
+(pyramid image)
