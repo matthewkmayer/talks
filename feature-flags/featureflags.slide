@@ -1,0 +1,98 @@
+Feature flags
+Toggle on, toggle off
+31 Jul 2017
+Tags: Feature Toggles, TBD
+
+Matthew Mayer
+Software Engineer, Ion Channel
+matthewkmayer@gmail.com
+http://ionchannel.io
+@motoblag
+
+* Slides available on GitHub
+
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL: Look for a bunch of Golang and Rust projects.
+- *feature-flags* directory
+
+* Who am I?
+
+- Jack of all trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+- Obligatory "DevOps fan" bullet point
+
+* Who's this talk for?
+
+- Developers wanting quick releases
+- Operations: supporting various ways to handle feature flags
+
+* Make with the quotes
+
+* https://en.wikipedia.org/wiki/Feature_toggle
+
+A feature toggle (also feature switch, feature flag, feature flipper, conditional feature, etc.) is a technique in software development that attempts to provide an alternative to maintaining multiple source-code branches (known as feature branches), such that the feature can be tested, even before it is completed and ready for release. 
+
+Feature toggle is used to hide, enable or disable the features, during run time.
+
+* An example from Janice
+
+  def self.send_new_user_email(jwt, team_user)
+    if Janice.config.use_pepe_for_email
+      Helpers.send_event_to_pepe(jwt, team_user.user.summary, 'user_signup',
+                                 create_invite_link(team_user), team_user.team.name)
+      return ['success', nil]
+    else
+      mail = invite_personalizations(team_user, :new_user)
+      mail.subject 'Welcome to the system'
+      send_mail(mail)
+    end
+  end
+
+* What did that flag let us do?
+
+The 
+
+  if Janice.config.use_pepe_for_email
+
+line let us insert the code for sending emails via Pepe before it was completed.
+
+* Why bother with feature flags?
+
+- In-flight work can be merged early, even if it's incomplete.
+- SCM branches don't live long: created, work performed and merged early. No merge hell!
+- Releases can happen more often: new behavior depending on other changes can be feature-flagged.
+
+* Dark deploys, dark launches
+
+A dark deploy is when new functionality is launched but receives zero traffic, or a silent subset of traffic. The silent traffic is sent to the new functionality to verify it's working as expected, but doesn't affect users.
+
+* Dark deploys, dark launches
+
+This technique is used heavily by companies with large user bases.  EG: Facebook.
+
+https://www.facebook.com/notes/facebook-engineering/hammering-usernames/96390263919
+
+* Downsides and pitfalls
+
+- More testing surface area: should run *all* flag permutations
+- Long-lived feature toggles that don't change state are technical debt
+- Many toggles means messy, hard to understand code
+
+* Still worth it
+
+* Compile time vs run time flags
+
+We can specify feature flags during compile time.  Think #ifdef in C.
+
+Run time lets us change behavior without doing a redeploy.  Useful for large or otherwise difficult-to-deploy systems.  Adds complexity and potentially hard to diagnose issues.
+
+The earlier Janice example is a run time flag: the code for both paths exist in the deployed code.
+
+* Resources
+
+- https://martinfowler.com/articles/feature-toggles.html
+- https://launchdarkly.com/featureflags.html
+- https://trunkbaseddevelopment.com/feature-flags/
+- https://devops.com/feature-branching-vs-feature-flags-whats-right-tool-job/
