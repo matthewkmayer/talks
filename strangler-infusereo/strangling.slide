@@ -1,19 +1,19 @@
 Strangler pattern
 Ruby to Golang
-23 Jan 2015
-Tags: Strangler, Golang, Go
+08 Aug 2017
+Tags: Strangler, Golang, Docker
 
 Matthew Mayer
-Consultant Developer, DualSpark
-matthew@dualspark.com
-http://dualspark.com
+Software Engineer
+matthewkmayer@gmail.com
+http://www.ionchannel.io/
 @motoblag
 
 * Slides available on GitHub
 
 .link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
 
-- the "k" is important in the URL: Look for a bunch of Golang projects and a shameful .NET one.
+- the "k" is important in the URL: Look for a bunch of Golang and Rust projects.
 - *strangler-infusereo* directory
 
 * Who am I?
@@ -45,12 +45,18 @@ Gradually create a new system over the existing one, taking over responsibility
 - Strong test coverage
 
 * Two ways of strangling
-- Proxy
+- Proxy (two choices)
 - Delegation
 
-* Proxy
+* Service-based proxy
 
 .image proxy.png
+
+* Reverse Proxy technique
+
+Use a tool such as nginx to control which endpoints go to which service.
+
+All traffic goes through the reverse proxy.
 
 * Delegation
 
@@ -73,7 +79,6 @@ Gradually create a new system over the existing one, taking over responsibility
 
 * Feature switches
 - On the strangled app, introduce code switches to enable traffic to the strangler
-- Pace yourself: slow but don't relent
 - If things fall apart, toggle switches back to the strangled app
 
 * Feature switches
@@ -198,7 +203,7 @@ snip
 * Demo strangling Ruby with cucumber tests
 
 * Two ways of strangling
-- Proxy
+- Proxy (two choices)
 - Delegation
 
 * Proxy
@@ -225,6 +230,22 @@ Still transfer responsibility in chunks.
 
 When all functionality is in the new service, clients do a big switch to the new service.
 
+* Reverse proxy technique
+
+* Existing Dockerfile
+
+(stuff here)
+
+* What happens inside the container stays inside the container
+
+Upstream services shouldn't care about what's going on inside.  The container that's got a strangler in it should look the same as one that doesn't.
+
+* Nginx upstream proxy
+
+Here's how it works:
+
+* Reverse proxy demo
+
 * Proxy or delegation?
 
 Figure out what fits best in your environment.
@@ -239,9 +260,3 @@ If in doubt, go with the proxying pattern.  The client's big switch to a new ser
 - Proxy or delegate
 
 * Questions, comments
-
-* BONUS SLIDE
-
-DualSpark is hiring.  Tackle large scope, interesting problems by helping customers migrate to AWS.
-
-Interested? Let's talk, here or via email.
