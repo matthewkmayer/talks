@@ -72,7 +72,7 @@ A dark deploy is when new functionality is launched but receives zero traffic, o
 
 This technique is used heavily by companies with large user bases.  EG: Facebook.
 
-https://www.facebook.com/notes/facebook-engineering/hammering-usernames/96390263919
+.link https://www.facebook.com/notes/facebook-engineering/hammering-usernames/96390263919 https://www.facebook.com/notes/facebook-engineering/hammering-usernames/96390263919
 
 * Downsides and pitfalls
 
@@ -92,7 +92,15 @@ The earlier Janice example is a run time flag: the code for both paths exist in 
 
 * Resources
 
-- https://martinfowler.com/articles/feature-toggles.html
-- https://launchdarkly.com/featureflags.html
-- https://trunkbaseddevelopment.com/feature-flags/
-- https://devops.com/feature-branching-vs-feature-flags-whats-right-tool-job/
+.link https://martinfowler.com/articles/feature-toggles.html https://martinfowler.com/articles/feature-toggles.html
+.link https://launchdarkly.com/featureflags.html https://launchdarkly.com/featureflags.html
+.link https://trunkbaseddevelopment.com/feature-flags/ https://trunkbaseddevelopment.com/feature-flags/
+.link https://devops.com/feature-branching-vs-feature-flags-whats-right-tool-job/ https://devops.com/feature-branching-vs-feature-flags-whats-right-tool-job/
+
+* Video time!
+
+* Video time!
+
+30m:
+
+.link https://www.youtube.com/watch?v=rBBLMmr9e-k https://www.youtube.com/watch?v=rBBLMmr9e-k
