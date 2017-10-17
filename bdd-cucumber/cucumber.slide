@@ -18,7 +18,7 @@ https://matthewkmayer.github.io
 
 * Who am I?
 
-- Jack of all trades
+- Jack of all software trades
 - Written, implemented and maintained microservices in the cloud
 - Super keen on agile software development
 
@@ -66,7 +66,7 @@ Shared language
 
 Why test the *functionality* of code?
 
-.link https://i.imgur.com/qrIJyor.gifv
+"Unit tests pass!"
 
 * Right level of abstraction
 
@@ -112,6 +112,12 @@ Gherkin format:
     When
     Then
 
+* Gherkin breakdown
+
+    Given the prerequisites for the test
+    When I perform the action
+    Then I get the expected results
+
 * Gherkin example
 
     Given I'm logged in to Twitter
@@ -122,7 +128,7 @@ Gherkin format:
 
 Can't get away from actually writing code.
 
-    Given /^I'm logged in to Twitter$/ do
+    When /^I send a tweet$/ do
         url = URI.parse('https://api.twitter.com/1.1/statuses/update.json')
         tweet_to_send = Net::HTTP::Post.new(url.to_s)
         tweet_to_send.body = {status: 'A test tweet'}
@@ -131,7 +137,7 @@ Can't get away from actually writing code.
 
 * Execution
 
-With the Cucumber tool installed, execution is easy:
+With the Cucumber tool installed:
 
     cucumber
 
@@ -157,3 +163,7 @@ Add cucumber to build pipeline: run the cucumber tests automatically, on every b
 After a deployment, run the cucumber tests against the deployed software
 
 * Code and deploy with confidence
+
+* Questions?
+
+* Live demo
