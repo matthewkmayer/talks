@@ -27,3 +27,53 @@ https://matthewkmayer.github.io
 - What's BDD
 - Cucumber?
 - In action
+
+* What's BDD?
+
+*Behavior* *Driven* *Development* is hard to discuss without bringing up *Test* *Driven* *Development* (TDD).
+
+* Test driven development
+
+Short cycle of:
+
+- Write a test
+- Run all tests, see new test fail
+- Code just enough to make the test pass
+- Run all tests, see new test pass
+- Refactor
+
+* Test driven development
+
+Red-green-refactor may be an easier way to remember it
+
+* Spectrum of Test Driven Development
+
+Rigorous following of red-green-refactor to "test-first" development to "tests after" (or tests never).
+
+* The boon of Test Driven Development
+
+- Tests don't get missed (story time on missing tests)
+- Code is inherently easily testable
+- Code comments: easier to focus on commenting *why* not *what*
+
+* Behavior means functionality
+
+* Stepping up the stack
+
+Why test the *functionality* of code?
+
+.link https://i.imgur.com/qrIJyor.gifv
+
+* Stepping up the stack
+
+Shared language
+
+
+
+* overview
+
+Why focus on external behavior => focus on *what* is being done not how it's being done => can use same tests to verify changes, big or small => small change is refactoring, big change is new language for a service => right level of abstraction for more people for easier discussion
+
+How to do it => two paths: BDD requires TDD; functional tests just require a tool like Cucumber.
+
+Where to start => got an API?  Write a test. `gem install cucumber ; cucumber --init` and write away.  Add to build/CI server.
