@@ -1,6 +1,6 @@
 BDD and Cucumber
 Behavior Driven Development
-4 Oct 2017
+18 Oct 2017
 Tags: BDD, cucumber
 
 Matthew Mayer
@@ -60,20 +60,100 @@ Rigorous following of red-green-refactor to "test-first" development to "tests a
 
 * Stepping up the stack
 
+Shared language
+
+* Stepping up the stack
+
 Why test the *functionality* of code?
 
 .link https://i.imgur.com/qrIJyor.gifv
 
-* Stepping up the stack
+* Right level of abstraction
 
-Shared language
+Not many people speak unit tests.
 
+Desired behavior is easier to convey.
 
+* Test reuse
 
-* overview
+Verify changes, big or small
 
-Why focus on external behavior => focus on *what* is being done not how it's being done => can use same tests to verify changes, big or small => small change is refactoring, big change is new language for a service => right level of abstraction for more people for easier discussion
+* Focus on the what, not the how
 
-How to do it => two paths: BDD requires TDD; functional tests just require a tool like Cucumber.
+Test outward-facing behavior
 
-Where to start => got an API?  Write a test. `gem install cucumber ; cucumber --init` and write away.  Add to build/CI server.
+* Black box testing
+
+These functional level tests interact with the system under test at its boundaries.
+
+How the behavior is implemented doesn't matter: could be software, a trained pet, letting cosmic rays flip bits, etc...
+
+* Go/no go
+
+Catch incorrect behavior at the system's input and output layers
+
+* But, unit tests!
+
+Unit tests can't perform the same role as functional/behavior tests.
+
+A test interacting with the system at its input and output layers is not a unit test.
+
+* How to do it
+
+Use a tool with Behavior Driven Development in mind
+
+* Cucumber!
+
+* Speaking the language
+
+Gherkin format:
+
+    Given
+    When
+    Then
+
+* Gherkin example
+
+    Given I'm logged in to Twitter
+    When I send a tweet
+    Then the tweet is shown on my list of tweets
+
+* Execution
+
+Can't get away from actually writing code.
+
+    Given /^I'm logged in to Twitter$/ do
+        url = URI.parse('https://api.twitter.com/1.1/statuses/update.json')
+        tweet_to_send = Net::HTTP::Post.new(url.to_s)
+        tweet_to_send.body = {status: 'A test tweet'}
+        Net::HTTP.start(url.host, url.port) {|http| http.request(tweet_to_send)}
+    end
+
+* Execution
+
+With the Cucumber tool installed, execution is easy:
+
+    cucumber
+
+* DIY from scratch
+
+- Install cucumber:
+    gem install cucumber
+- Have cucumber set up the files it needs:
+    cucumber --init
+- Write a Gherkin scenario with steps
+- Implement the step definitions
+
+* DIY level 0
+
+Write the behavior/functional tests first
+
+* DIY level 1
+
+Add cucumber to build pipeline: run the cucumber tests automatically, on every build
+
+* DIY level 2
+
+After a deployment, run the cucumber tests against the deployed software
+
+* Code and deploy with confidence
