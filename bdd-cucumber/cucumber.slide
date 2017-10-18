@@ -16,17 +16,26 @@ https://matthewkmayer.github.io
 - the "k" is important in the URL
 - *bdd-cucumber* directory
 
+* What are we doing?
+
+- Behavior Driven Development (BDD)
+- Cucumber
+- In action
+- Questions at the end, please
+
 * Who am I?
 
 - Jack of all software trades
 - Written, implemented and maintained microservices in the cloud
 - Super keen on agile software development
 
-* What are we doing?
+* This time we're going to do it right
 
-- What's BDD
-- Cucumber?
-- In action
+Alice and Bob's new project: backbone of the company.
+
+Previous projects: behavior regressions, features "done" but not what was asked for.
+
+* Behavior Driven Development
 
 * What's BDD?
 
@@ -52,9 +61,9 @@ Rigorous following of red-green-refactor to "test-first" development to "tests a
 
 * The boon of Test Driven Development
 
-- Tests don't get missed (story time on missing tests)
 - Code is inherently easily testable
 - Code comments: easier to focus on commenting *why* not *what*
+- Tests don't get missed (Bob's story on tests written, not run)
 
 * Behavior means functionality
 
@@ -68,7 +77,7 @@ Why test the *functionality* of code?
 
 "Unit tests pass!"
 
-* Right level of abstraction
+* Right level of abstraction for shared definitions
 
 Not many people speak unit tests.
 
@@ -76,7 +85,8 @@ Desired behavior is easier to convey.
 
 * Test reuse
 
-Verify changes, big or small
+- Major refactors and unit tests
+- Verify changes, big or small
 
 * Focus on the what, not the how
 
@@ -98,9 +108,29 @@ Unit tests can't perform the same role as functional/behavior tests.
 
 A test interacting with the system at its input and output layers is not a unit test.
 
-* How to do it
+* Where do your tests run?
 
-Use a tool with Behavior Driven Development in mind
+- Tests tied to codebase: always run inside a testing environment
+- Behavior tests outside deployed codebase: makes no assumptions about environment, only interactions
+
+* Alice's experience with "unit" tests
+
+Tests written too close to the codebase means it's too tempting to reach past the input layer "just this once."
+
+Those tests
+
+- don't test the same codepath as users of the service
+- can only be used in the test harness
+
+* Enforcing separation
+
+Use a Behavior Driven Development tool.
+
+* Alice and Bob's gameplan
+
+- Make the skeleton of the new service
+- Convert first behavior requirement into a functional test
+- Red, green, refactor
 
 * Cucumber!
 
@@ -137,11 +167,11 @@ Can't get away from actually writing code.
 
 * Execution
 
-With the Cucumber tool installed:
+After experimenting with the tool, Alice and Bob know they can run Cucumber with this command:
 
     cucumber
 
-* DIY from scratch
+* Cucumber from scratch
 
 - Install cucumber:
     gem install cucumber
@@ -150,20 +180,37 @@ With the Cucumber tool installed:
 - Write a Gherkin scenario with steps
 - Implement the step definitions
 
-* DIY level 0
+* Gameplane level 0
 
 Write the behavior/functional tests first
 
-* DIY level 1
+* Gameplane level 1
 
 Add cucumber to build pipeline: run the cucumber tests automatically, on every build
 
-* DIY level 2
+* Gameplane level 2
 
 After a deployment, run the cucumber tests against the deployed software
 
+* Not all sunshine and puppies
+
+Downsides Alice and Bob found:
+
+- Speed
+- More code to manage
+- Code coverage metrics
+- Required skill level
+
+* Upsides
+
+- Gherkin descriptions are understandable
+- Behavior tests can run against any deployment of the service
+- (Almost) free regression testing
+- Codepaths used by tests are the same as users of the service
+- Confidence all 'round the behavior is correct
+
 * Code and deploy with confidence
 
-* Questions?
-
 * Live demo
+
+* Questions?
