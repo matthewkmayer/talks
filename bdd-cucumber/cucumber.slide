@@ -131,6 +131,7 @@ Use a Behavior Driven Development tool.
 - Make the skeleton of the new service
 - Convert first behavior requirement into a functional test
 - Red, green, refactor
+- Repeat steps two and three
 
 * Cucumber!
 
@@ -180,15 +181,15 @@ After experimenting with the tool, Alice and Bob know they can run Cucumber with
 - Write a Gherkin scenario with steps
 - Implement the step definitions
 
-* Gameplane level 0
+* Gameplan level 0
 
 Write the behavior/functional tests first
 
-* Gameplane level 1
+* Gameplan level 1
 
 Add cucumber to build pipeline: run the cucumber tests automatically, on every build
 
-* Gameplane level 2
+* Gameplan level 2
 
 After a deployment, run the cucumber tests against the deployed software
 
