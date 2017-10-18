@@ -1,0 +1,216 @@
+BDD and Cucumber
+Behavior Driven Development
+18 Oct 2017
+Tags: BDD, cucumber
+
+Matthew Mayer
+Software Engineer person
+matthewkmayer@gmail.com
+https://matthewkmayer.github.io
+@motoblag
+
+* Slides available on GitHub
+
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL
+- *bdd-cucumber* directory
+
+* What are we doing?
+
+- Behavior Driven Development (BDD)
+- Cucumber
+- In action
+- Questions at the end, please
+
+* Who am I?
+
+- Jack of all software trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+
+* This time we're going to do it right
+
+Alice and Bob's new project: backbone of the company.
+
+Previous projects: behavior regressions, features "done" but not what was asked for.
+
+* Behavior Driven Development
+
+* What's BDD?
+
+*Behavior* *Driven* *Development* is hard to discuss without bringing up *Test* *Driven* *Development* (TDD).
+
+* Test driven development
+
+Short cycle of:
+
+- Write a test
+- Run all tests, see new test fail
+- Code just enough to make the test pass
+- Run all tests, see new test pass
+- Refactor
+
+* Test driven development
+
+Red-green-refactor may be an easier way to remember it
+
+* Spectrum of Test Driven Development
+
+Rigorous following of red-green-refactor to "test-first" development to "tests after" (or tests never).
+
+* The boon of Test Driven Development
+
+- Code is inherently easily testable
+- Code comments: easier to focus on commenting *why* not *what*
+- Tests don't get missed (Bob's story on tests written, not run)
+
+* Behavior means functionality
+
+* Stepping up the stack
+
+Shared language
+
+* Stepping up the stack
+
+Why test the *functionality* of code?
+
+"Unit tests pass!"
+
+* Right level of abstraction for shared definitions
+
+Not many people speak unit tests.
+
+Desired behavior is easier to convey.
+
+* Test reuse
+
+- Major refactors and unit tests
+- Verify changes, big or small
+
+* Focus on the what, not the how
+
+Test outward-facing behavior
+
+* Black box testing
+
+These functional level tests interact with the system under test at its boundaries.
+
+How the behavior is implemented doesn't matter: could be software, a trained pet, letting cosmic rays flip bits, etc...
+
+* Go/no go
+
+Catch incorrect behavior at the system's input and output layers
+
+* But, unit tests!
+
+Unit tests can't perform the same role as functional/behavior tests.
+
+A test interacting with the system at its input and output layers is not a unit test.
+
+* Where do your tests run?
+
+- Tests tied to codebase: always run inside a testing environment
+- Behavior tests outside deployed codebase: makes no assumptions about environment, only interactions
+
+* Alice's experience with "unit" tests
+
+Tests written too close to the codebase means it's too tempting to reach past the input layer "just this once."
+
+Those tests
+
+- don't test the same codepath as users of the service
+- can only be used in the test harness
+
+* Enforcing separation
+
+Use a Behavior Driven Development tool.
+
+* Alice and Bob's gameplan
+
+- Make the skeleton of the new service
+- Convert first behavior requirement into a functional test
+- Red, green, refactor
+
+* Cucumber!
+
+* Speaking the language
+
+Gherkin format:
+
+    Given
+    When
+    Then
+
+* Gherkin breakdown
+
+    Given the prerequisites for the test
+    When I perform the action
+    Then I get the expected results
+
+* Gherkin example
+
+    Given I'm logged in to Twitter
+    When I send a tweet
+    Then the tweet is shown on my list of tweets
+
+* Execution
+
+Can't get away from actually writing code.
+
+    When /^I send a tweet$/ do
+        url = URI.parse('https://api.twitter.com/1.1/statuses/update.json')
+        tweet_to_send = Net::HTTP::Post.new(url.to_s)
+        tweet_to_send.body = {status: 'A test tweet'}
+        Net::HTTP.start(url.host, url.port) {|http| http.request(tweet_to_send)}
+    end
+
+* Execution
+
+After experimenting with the tool, Alice and Bob know they can run Cucumber with this command:
+
+    cucumber
+
+* Cucumber from scratch
+
+- Install cucumber:
+    gem install cucumber
+- Have cucumber set up the files it needs:
+    cucumber --init
+- Write a Gherkin scenario with steps
+- Implement the step definitions
+
+* Gameplane level 0
+
+Write the behavior/functional tests first
+
+* Gameplane level 1
+
+Add cucumber to build pipeline: run the cucumber tests automatically, on every build
+
+* Gameplane level 2
+
+After a deployment, run the cucumber tests against the deployed software
+
+* Not all sunshine and puppies
+
+Downsides Alice and Bob found:
+
+- Speed
+- More code to manage
+- Code coverage metrics
+- Required skill level
+
+* Upsides
+
+- Gherkin descriptions are understandable
+- Behavior tests can run against any deployment of the service
+- (Almost) free regression testing
+- Codepaths used by tests are the same as users of the service
+- Confidence all 'round the behavior is correct
+
+* Code and deploy with confidence
+
+* Live demo
+
+* Questions?
