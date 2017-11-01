@@ -1,0 +1,193 @@
+Rust and the Cloud
+The journey with Rust and AWS
+31 Oct 2017
+Tags: Rust, AWS, cloud
+
+Matthew Mayer
+Software Engineer person
+matthewkmayer@gmail.com
+https://matthewkmayer.github.io
+@motoblag
+
+* Slides available on GitHub
+
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL
+- *rust-and-the-cloud* directory
+- link to rendered slides usually tweeted after event
+
+* What are we doing?
+
+- Past: Rust 1.0 and the cloud
+- Present: Rust 1.21 and friends (Hyper, tokio, Rusoto)
+- Future: Sky's the limit!
+- Questions at the end, please
+
+* Who am I?
+
+- Jack of all software trades
+- Super keen on agile software development
+- Written, implemented and maintained microservices in the cloud
+
+* What's your level of knowledge of the cloud?
+
+* Rust 1.0
+
+Hooray, stable!
+
+Time to start looking at using Rust.
+
+* Landscape at the time
+
+- Java (Netflix)
+- Ruby (on Rails)
+- Python
+- Go
+- Node
+
+* Cloud native vs traditional application
+
+Cloud native means emphasis on
+
+- Ease of deployment
+- Robustness
+- Quick startup
+- Stability
+- Efficiency
+
+* Efficient applications are instantly cheaper to run
+
+* Rust's promises make it a shoo-in
+
+* Speed and safety
+
+- Great performance
+- No GC jitter (no stacking of VM perf jitter)
+- Strong typing, smart compiler moves bugs to the left
+- Single binary to deploy
+
+* Moving toward Rust 1.21 - ecosystem matures
+
+- Hyper and Reqwest
+- Tokio
+- Compilation speed improvements
+- Virtuous cycle of more and more adopotion
+
+* Interest intensifies
+
+* Rust 1.21
+
+Ecosystem continues to mature and expand.
+
+Especially Rusoto!
+
+* Rusoto
+
+*The* AWS SDK for Rust.
+
+.link https://rusoto.org/ https://rusoto.org/
+
+.link https://github.com/rusoto/rusoto https://github.com/rusoto/rusoto
+
+* Why make an SDK?
+
+Dang near *everyone* is moving to the cloud at an accelerating rate.
+
+* Scalpel or a toy?
+
+* First class citizen in the cloud-native world
+
+* Rusoto in applications
+
+- queues
+- object storage (S3)
+
+* Rusoto for cloud infrastructure
+
+Impromptu survey and data gathering show this is the most common use case
+
+- Kubernetes cluster lifecycle management tool
+- AWS Docker container registry cleaner
+- AMI building tool
+- Configuration management accelerator (Rust speed > Python speed)
+- Infrastructure as code
+
+* Rusoto for security
+
+Security Token Service (STS) CLI app
+
+* Maintaining Rusoto
+
+- My first real open source project
+- Rust community
+- People are great
+
+* How Rusoto is built
+
+Botocore through a code generator to a crate per AWS service.
+
+* Rusoto scope
+
+- ~85 services supported
+- 500,000+ lines of code
+- 40 minute compilation times
+
+* Codegen blog posts
+
+Three part series on my blog:
+
+.link https://matthewkmayer.github.io/ https://matthewkmayer.github.io/
+
+* Code snippet
+
+From a recent hackday on release-party:
+
+    fn speak_polly_speak(to_speak: &str) {
+        let credentials = DefaultCredentialsProvider::new().unwrap();
+        let client = PollyClient::new(default_tls_client().unwrap(), credentials, Region::UsEast1);
+        let request = SynthesizeSpeechInput {
+            output_format: "ogg_vorbis".to_owned(),
+            text: to_speak.to_owned(),
+            voice_id: "Matthew".to_owned(),
+            ..Default::default()
+        };
+        let response = client.synthesize_speech(&request).expect("Make sounds");
+
+        let mut buffer = File::create("foo.ogg").expect("couldn't make file");
+        buffer.write(&response.audio_stream.expect("no stream found"))
+            .expect("couldn't write voice to file");
+        buffer.flush().expect("couldn't flush buffer");
+        // (Sound playing here via rodio)
+    }
+
+* Where Rusoto is heading
+
+- Support all AWS services
+- Improve ergonomics
+- Increase performance
+
+* Future of Rust and the cloud
+
+- HTTP server choices
+- Speed, speed, speed of services (lambda)
+- Full AWS SDK means more adoption of Rust
+- More infrastructure tooling
+
+* How you can help
+
+- More libraries
+- Speed up rustc
+- Rusoto has plenty of work left
+
+* Question?
+
+Links:
+
+.link http://samwho.co.uk/blog/2017/09/06/move-your-bugs-to-the-left/ http://samwho.co.uk/blog/2017/09/06/move-your-bugs-to-the-left/
+
+.link https://rusoto.org/ https://rusoto.org/
+
+.link https://github.com/rusoto/rusoto https://github.com/rusoto/rusoto
+
+.link https://matthewkmayer.github.io/ https://matthewkmayer.github.io/
