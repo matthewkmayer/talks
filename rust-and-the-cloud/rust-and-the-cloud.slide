@@ -1,0 +1,81 @@
+Rust and the Cloud
+The journey with Rust and AWS
+31 Oct 2017
+Tags: Rust, AWS, cloud
+
+Matthew Mayer
+Software Engineer person
+matthewkmayer@gmail.com
+https://matthewkmayer.github.io
+@motoblag
+
+* Slides available on GitHub
+
+.link https://github.com/matthewkmayer/talks https://github.com/matthewkmayer/talks
+
+- the "k" is important in the URL
+- *rust-and-the-cloud* directory
+- link to rendered slides usually tweeted after event
+
+* What are we doing?
+
+- Past: Rust 1.0 and the cloud
+- Present: Rust 1.21 and friends (Hyper, tokio, Rusoto) - applications on AWS, infra tools, etc...
+- Future: Sky's the limit!
+- Questions at the end, please
+
+* Who am I?
+
+- Jack of all software trades
+- Written, implemented and maintained microservices in the cloud
+- Super keen on agile software development
+
+* What's your level of knowledge of the cloud?
+
+* Rust 1.0
+
+Hooray, stable!
+
+Time to start looking at using Rust.
+
+* Landscape at the time
+
+- Java (Netflix)
+- Ruby (on Rails)
+- Python
+- Go
+- Node?
+
+* Cloud native vs traditional application
+
+Cloud native means emphasis on
+
+- Ease of deployment
+- Robustness
+- Quick startup
+- Stability
+- Efficiency
+
+* Efficient applications are instantly cheaper to run
+
+* Rust's promises make it a shoo-in
+
+* Speed and safety
+
+- Great performance
+- No GC jitter (no stacking of VM perf jitter)
+- Strong typing moves bugs to the left
+- Single binary to deploy
+
+* Ecosystem matures
+
+- Hyper and Reqwest
+- Tokio
+- Compilation speed improvements
+- Virtuous cycle of more and more adopotion
+
+* Question?
+
+Links:
+
+http://samwho.co.uk/blog/2017/09/06/move-your-bugs-to-the-left/
