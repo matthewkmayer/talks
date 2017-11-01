@@ -20,15 +20,15 @@ https://matthewkmayer.github.io
 * What are we doing?
 
 - Past: Rust 1.0 and the cloud
-- Present: Rust 1.21 and friends (Hyper, tokio, Rusoto) - applications on AWS, infra tools, etc...
+- Present: Rust 1.21 and friends (Hyper, tokio, Rusoto)
 - Future: Sky's the limit!
 - Questions at the end, please
 
 * Who am I?
 
 - Jack of all software trades
-- Written, implemented and maintained microservices in the cloud
 - Super keen on agile software development
+- Written, implemented and maintained microservices in the cloud
 
 * What's your level of knowledge of the cloud?
 
@@ -44,7 +44,7 @@ Time to start looking at using Rust.
 - Ruby (on Rails)
 - Python
 - Go
-- Node?
+- Node
 
 * Cloud native vs traditional application
 
@@ -64,10 +64,10 @@ Cloud native means emphasis on
 
 - Great performance
 - No GC jitter (no stacking of VM perf jitter)
-- Strong typing moves bugs to the left
+- Strong typing, smart compiler moves bugs to the left
 - Single binary to deploy
 
-* Ecosystem matures
+* Moving toward Rust 1.21 - ecosystem matures
 
 - Hyper and Reqwest
 - Tokio
@@ -127,7 +127,47 @@ Security Token Service (STS) CLI app
 
 Botocore through a code generator to a crate per AWS service.
 
-* Future
+* Rusoto scope
+
+- ~85 services supported
+- 500,000+ lines of code
+- 40 minute compilation times
+
+* Codegen blog posts
+
+Three part series on my blog:
+
+.link https://matthewkmayer.github.io/ https://matthewkmayer.github.io/
+
+* Code snippet
+
+From a recent hackday on release-party:
+
+    fn speak_polly_speak(to_speak: &str) {
+        let credentials = DefaultCredentialsProvider::new().unwrap();
+        let client = PollyClient::new(default_tls_client().unwrap(), credentials, Region::UsEast1);
+        let request = SynthesizeSpeechInput {
+            output_format: "ogg_vorbis".to_owned(),
+            text: to_speak.to_owned(),
+            voice_id: "Matthew".to_owned(),
+            ..Default::default()
+        };
+        let response = client.synthesize_speech(&request).expect("Make sounds");
+
+        let mut buffer = File::create("foo.ogg").expect("couldn't make file");
+        buffer.write(&response.audio_stream.expect("no stream found"))
+            .expect("couldn't write voice to file");
+        buffer.flush().expect("couldn't flush buffer");
+        // (Sound playing here via rodio)
+    }
+
+* Where Rusoto is heading
+
+- Support all AWS services
+- Improve ergonomics
+- Increase performance
+
+* Future of Rust and the cloud
 
 - HTTP server choices
 - Speed, speed, speed of services (lambda)
@@ -149,3 +189,5 @@ Links:
 .link https://rusoto.org/ https://rusoto.org/
 
 .link https://github.com/rusoto/rusoto https://github.com/rusoto/rusoto
+
+.link https://matthewkmayer.github.io/ https://matthewkmayer.github.io/
