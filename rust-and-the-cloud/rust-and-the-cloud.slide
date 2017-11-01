@@ -74,8 +74,78 @@ Cloud native means emphasis on
 - Compilation speed improvements
 - Virtuous cycle of more and more adopotion
 
+* Interest intensifies
+
+* Rust 1.21
+
+Ecosystem continues to mature and expand.
+
+Especially Rusoto!
+
+* Rusoto
+
+*The* AWS SDK for Rust.
+
+.link https://rusoto.org/ https://rusoto.org/
+
+.link https://github.com/rusoto/rusoto https://github.com/rusoto/rusoto
+
+* Why make an SDK?
+
+Dang near *everyone* is moving to the cloud at an accelerating rate.
+
+* Scalpel or a toy?
+
+* First class citizen in the cloud-native world
+
+* Rusoto in applications
+
+- queues
+- object storage (S3)
+
+* Rusoto for cloud infrastructure
+
+Impromptu survey and data gathering show this is the most common use case
+
+- Kubernetes cluster lifecycle management tool
+- AWS Docker container registry cleaner
+- AMI building tool
+- Configuration management accelerator (Rust speed > Python speed)
+- Infrastructure as code
+
+* Rusoto for security
+
+Security Token Service (STS) CLI app
+
+* Maintaining Rusoto
+
+- My first real open source project
+- Rust community
+- People are great
+
+* How Rusoto is built
+
+Botocore through a code generator to a crate per AWS service.
+
+* Future
+
+- HTTP server choices
+- Speed, speed, speed of services (lambda)
+- Full AWS SDK means more adoption of Rust
+- More infrastructure tooling
+
+* How you can help
+
+- More libraries
+- Speed up rustc
+- Rusoto has plenty of work left
+
 * Question?
 
 Links:
 
-http://samwho.co.uk/blog/2017/09/06/move-your-bugs-to-the-left/
+.link http://samwho.co.uk/blog/2017/09/06/move-your-bugs-to-the-left/ http://samwho.co.uk/blog/2017/09/06/move-your-bugs-to-the-left/
+
+.link https://rusoto.org/ https://rusoto.org/
+
+.link https://github.com/rusoto/rusoto https://github.com/rusoto/rusoto
